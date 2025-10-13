@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 const posts = [
   {
     date: '2025-01-20',
@@ -21,39 +23,15 @@ const posts = [
 ];
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Posts - JT's Weblog</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <header>
-    <h1>JT's Weblog</h1>
-    <p>Thoughts, writings, and musings</p>
-  </header>
+<BaseLayout title="All Posts">
+  <h2>All Posts</h2>
 
-  <hr>
-
-  <main>
-    <h2>All Posts</h2>
-
-    <h3>2025</h3>
-    <ul>
-      {posts.map(post => (
-        <li>
-          <strong>{post.date.slice(5)}:</strong> <a href={`/posts/${post.slug}`}>{post.title}</a>
-        </li>
-      ))}
-    </ul>
-  </main>
-
-  <hr>
-
-  <nav>
-    <p><a href="/">Home</a> | <strong>Posts</strong> | <a href="/ai-gen">AI-Gen</a> | <a href="/about">About</a></p>
-  </nav>
-</body>
-</html>
+  <h3>2025</h3>
+  <ul>
+    {posts.map(post => (
+      <li>
+        <strong>{post.date.slice(5)}:</strong> <a href={`/posts/${post.slug}`}>{post.title}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

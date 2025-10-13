@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 const posts = [
   {
     date: 'January 20, 2025',
@@ -21,42 +23,18 @@ const posts = [
 ];
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Posts Tag: AI-Generated - JT's Weblog</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <header>
-    <h1>JT's Weblog</h1>
-    <p>Thoughts, writings, and musings</p>
-  </header>
+<BaseLayout title="Posts Tag: AI-Generated">
+  <h2>Posts Tagged: AI-Generated</h2>
 
-  <hr>
+  {posts.map((post, index) => (
+    <>
+      <article>
+        <h3><a href={`/posts/${post.slug}`}>{post.title}</a></h3>
+        <p><em>Published: {post.date}</em></p>
+        <p>{post.excerpt}</p>
+      </article>
 
-  <main>
-    <h2>Posts Tagged: AI-Generated</h2>
-
-    {posts.map((post, index) => (
-      <>
-        <article>
-          <h3><a href={`/posts/${post.slug}`}>{post.title}</a></h3>
-          <p><em>Published: {post.date}</em></p>
-          <p>{post.excerpt}</p>
-        </article>
-
-        {index < posts.length - 1 && <hr />}
-      </>
-    ))}
-  </main>
-
-  <hr>
-
-  <nav>
-    <p><a href="/">Home</a> | <a href="/posts">Posts</a> | <strong>AI-Gen</strong> | <a href="/about">About</a></p>
-  </nav>
-</body>
-</html>
+      {index < posts.length - 1 && <hr />}
+    </>
+  ))}
+</BaseLayout>

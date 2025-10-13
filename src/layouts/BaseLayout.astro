@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Posts', href: '/posts' },
+  { label: 'AI-Gen', href: '/ai-gen' },
+  { label: 'About', href: '/about' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} - JT's Weblog</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>JT's Weblog</h1>
+    <p>Thoughts, writings, and musings</p>
+  </header>
+
+  <hr>
+
+  <main>
+    <slot />
+  </main>
+
+  <hr>
+
+  <nav>
+    <p>
+      {navItems.map((item, index) => (
+        <>
+          {item.href === currentPath ? (
+            <strong>{item.label}</strong>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+          {index < navItems.length - 1 && ' | '}
+        </>
+      ))}
+    </p>
+  </nav>
+</body>
+</html>

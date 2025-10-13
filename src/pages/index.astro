@@ -1,16 +1,40 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const recentPosts = [
+  {
+    date: 'January 20, 2025',
+    title: 'Getting Started with Lynx Browser',
+    slug: '2025-01-20-getting-started-with-lynx',
+    excerpt: 'An introduction to browsing the web with Lynx, the text-based browser that\'s been around since 1992. Learn why minimalism matters.'
+  },
+  {
+    date: 'January 15, 2025',
+    title: 'Why HTML-Only Websites Still Matter',
+    slug: '2025-01-15-why-html-only',
+    excerpt: 'Exploring the benefits of pure HTML websites: accessibility, speed, simplicity, and universal compatibility.'
+  },
+  {
+    date: 'January 10, 2025',
+    title: 'First Post: Building a Minimalist Blog',
+    slug: '2025-01-10-first-post',
+    excerpt: 'Welcome to my blog! In this first post, I explain why I\'m building a pure HTML blog without CSS or JavaScript.'
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="JT's Weblog">
+  <h2>Recent Posts</h2>
+
+  {recentPosts.map((post, index) => (
+    <>
+      <article>
+        <h3><a href={`/posts/${post.slug}`}>{post.title}</a></h3>
+        <p><em>Published: {post.date}</em></p>
+        <p>{post.excerpt}</p>
+      </article>
+
+      {index < recentPosts.length - 1 && <hr />}
+    </>
+  ))}
+</BaseLayout>
