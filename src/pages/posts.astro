@@ -1,26 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const posts = [
-  {
-    date: '2025-01-20',
-    title: 'Getting Started with Lynx Browser',
-    slug: '2025-01-20-getting-started-with-lynx',
-    tag: 'ai-generated'
-  },
-  {
-    date: '2025-01-15',
-    title: 'Why HTML-Only Websites Still Matter',
-    slug: '2025-01-15-why-html-only',
-    tag: 'ai-generated'
-  },
-  {
-    date: '2025-01-10',
-    title: 'First Post: Building a Minimalist Blog',
-    slug: '2025-01-10-first-post',
-    tag: 'ai-generated'
-  }
-];
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="All Posts">
@@ -30,7 +13,7 @@ const posts = [
   <ul>
     {posts.map(post => (
       <li>
-        <strong>{post.date.slice(5)}:</strong> <a href={`/posts/${post.slug}`}>{post.title}</a>
+        <strong>{post.data.pubDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}:</strong> <a href={`/posts/${post.slug}`}>{post.data.title}</a>
       </li>
     ))}
   </ul>

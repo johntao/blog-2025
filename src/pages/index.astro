@@ -1,26 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const recentPosts = [
-  {
-    date: 'January 20, 2025',
-    title: 'Getting Started with Lynx Browser',
-    slug: '2025-01-20-getting-started-with-lynx',
-    excerpt: 'An introduction to browsing the web with Lynx, the text-based browser that\'s been around since 1992. Learn why minimalism matters.'
-  },
-  {
-    date: 'January 15, 2025',
-    title: 'Why HTML-Only Websites Still Matter',
-    slug: '2025-01-15-why-html-only',
-    excerpt: 'Exploring the benefits of pure HTML websites: accessibility, speed, simplicity, and universal compatibility.'
-  },
-  {
-    date: 'January 10, 2025',
-    title: 'First Post: Building a Minimalist Blog',
-    slug: '2025-01-10-first-post',
-    excerpt: 'Welcome to my blog! In this first post, I explain why I\'m building a pure HTML blog without CSS or JavaScript.'
-  }
-];
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout title="JT's Weblog">
@@ -29,9 +14,9 @@ const recentPosts = [
   {recentPosts.map((post, index) => (
     <>
       <article>
-        <h3><a href={`/posts/${post.slug}`}>{post.title}</a></h3>
-        <p><em>Published: {post.date}</em></p>
-        <p>{post.excerpt}</p>
+        <h3><a href={`/posts/${post.slug}`}>{post.data.title}</a></h3>
+        <p><em>Published: {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+        <p>{post.data.description}</p>
       </article>
 
       {index < recentPosts.length - 1 && <hr />}
