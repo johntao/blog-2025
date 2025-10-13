@@ -1,0 +1,189 @@
+/* Lynx-inspired terminal styling */
+
+:root {
+  /* Color palette */
+  --color-bg-black: #1a191b;
+  --color-bg-black-deep: #0a0a0a;
+  --color-text-white: #d8d4d6;
+  --color-yellow: #fac688;
+  --color-blue: #84b5c6;
+  --color-red: #c45456;
+  --color-green: #93a65b;
+  --color-purple: #ad749f;
+  --color-grey: #404040;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg-black);
+  color: var(--color-text-white);
+  font-family: monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 16px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Headers */
+h1 {
+  color: var(--color-bg-black);
+  background-color: var(--color-yellow);
+  font-size: unset;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  width: fit-content;
+  margin-inline: auto;
+  padding-inline: 0.5em;
+}
+
+h2 {
+  font-size: unset;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+h3 {
+  font-size: unset;
+  font-weight: bold;
+  margin-left: 0.5em;
+  margin-block: 1rem;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 0.8em;
+  margin-bottom: 0.4em;
+  text-indent: 2em;
+}
+
+/* Paragraphs */
+p {
+  margin-left: 1em;
+}
+
+/* Emphasized text (Published dates, etc) */
+em {
+  color: var(--color-blue);
+  font-style: normal;
+}
+
+strong {
+  color: var(--color-red);
+  font-weight: normal;
+}
+
+/* Links */
+a {
+  color: var(--color-green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-yellow);
+  text-decoration: underline;
+}
+
+h3 > a:hover {
+  color: var(--color-yellow);
+}
+
+nav a {
+  color: var(--color-green);
+}
+
+nav a:hover {
+  color: var(--color-yellow);
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 3em;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  color: var(--color-purple);
+}
+
+ul>li::marker {
+  color: var(--color-purple);
+  content: '* ';
+}
+
+ol>li::marker {
+  color: var(--color-purple);
+}
+
+/* Description lists */
+dl {
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+dt {
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+dd {
+  margin-left: 2em;
+  margin-bottom: 0.5em;
+}
+
+/* Horizontal rules */
+hr {
+  border: none;
+  margin: 1rem 2rem;
+  border-top-style: dashed;
+  border-top-width: 1.8px;
+  border-top-color: var(--color-yellow);
+}
+
+/* Code blocks */
+pre {
+  background-color: var(--color-bg-black-deep);
+  border: 1px solid var(--color-grey);
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Blockquotes */
+blockquote {
+  color: var(--color-blue);
+  padding-left: 1em;
+  font-style: italic;
+}
+
+/* Navigation */
+nav {
+  margin-top: 1em;
+}
+
+nav p {
+  text-indent: 0;
+}
+
+nav strong {
+  color: var(--color-red);
+}
+
+/* Articles */
+article>* {
+  margin-bottom: 1rem;
+}

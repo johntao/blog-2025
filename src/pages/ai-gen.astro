@@ -1,0 +1,62 @@
+---
+const posts = [
+  {
+    date: 'January 20, 2025',
+    title: 'Getting Started with Lynx Browser',
+    slug: '2025-01-20-getting-started-with-lynx',
+    excerpt: 'An introduction to browsing the web with Lynx, the text-based browser that\'s been around since 1992. Learn why minimalism matters.'
+  },
+  {
+    date: 'January 15, 2025',
+    title: 'Why HTML-Only Websites Still Matter',
+    slug: '2025-01-15-why-html-only',
+    excerpt: 'Exploring the benefits of pure HTML websites: accessibility, speed, simplicity, and universal compatibility.'
+  },
+  {
+    date: 'January 10, 2025',
+    title: 'First Post: Building a Minimalist Blog',
+    slug: '2025-01-10-first-post',
+    excerpt: 'Welcome to my blog! In this first post, I explain why I\'m building a pure HTML blog without CSS or JavaScript.'
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts Tag: AI-Generated - JT's Weblog</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>JT's Weblog</h1>
+    <p>Thoughts, writings, and musings</p>
+  </header>
+
+  <hr>
+
+  <main>
+    <h2>Posts Tagged: AI-Generated</h2>
+
+    {posts.map((post, index) => (
+      <>
+        <article>
+          <h3><a href={`/posts/${post.slug}`}>{post.title}</a></h3>
+          <p><em>Published: {post.date}</em></p>
+          <p>{post.excerpt}</p>
+        </article>
+
+        {index < posts.length - 1 && <hr />}
+      </>
+    ))}
+  </main>
+
+  <hr>
+
+  <nav>
+    <p><a href="/">Home</a> | <a href="/posts">Posts</a> | <strong>AI-Gen</strong> | <a href="/about">About</a></p>
+  </nav>
+</body>
+</html>
