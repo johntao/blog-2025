@@ -10,19 +10,19 @@ tags: []
 
 This post is written by me :D
 
-I think the AI-generated one has already update my current status really (surprisely!?) well
+I think the AI-generated one has already updated my current status (surprisingly!?) well
 
-The first thing I notice is that they're good at capturing the keywords and expand it to a certain extend
+The first thing I notice is that they're good at capturing the keywords and expand it to a certain extent
 
-That's say, they're quite good delivering popular science in a evangelist way
+That's to say, they're quite good at delivering popular science in an evangelist way
 
 What I observed is that these generated articles are not so shy at repeating the same concept all over again
 
 Whereas I as a human being prefer daily dose of random stuff.
 
-Lastly, AI by default use the different tone of language, I wonder if this is trainable.
+Lastly, AI by default uses the different tone of language, I wonder if this is trainable.
 
 For my preference, I love to deliver concepts in concise emotional or humorous words.
 
-And I tend to keep it that way (not to train or prompt LLM too hard!) to make myself a living :D
+And I tend to keep it that way (not to train or prompt LLM too hard!) to earn myself a living :D
 
