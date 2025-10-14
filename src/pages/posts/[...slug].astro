@@ -3,27 +3,33 @@ import { getCollection } from 'astro:content';
 import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 
 export async function getStaticPaths() {
-  // Fetch entries from all author collections
-  const author1Entries = await getCollection('default');
-  const author2Entries = await getCollection('ai-generated');
+  // Fetch entries from all collections
+  const defaultEntries = await getCollection('default');
+  const aiGeneratedEntries = await getCollection('ai-generated');
 
-  // Combine all entries
-  const allEntries = [...author1Entries, ...author2Entries];
-
-  return allEntries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  // Map entries with collection info
+  return [
+    ...defaultEntries.map(entry => ({
+      params: { slug: entry.slug },
+      props: { entry, collection: 'default' },
+    })),
+    ...aiGeneratedEntries.map(entry => ({
+      params: { slug: entry.slug },
+      props: { entry, collection: 'ai-generated' },
+    })),
+  ];
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry, collection } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
 <BlogPostLayout
   title={entry.data.title}
   pubDate={entry.data.pubDate}
   tags={entry.data.tags}
+  collection={collection}
+  minutesRead={remarkPluginFrontmatter.minutesRead}
 >
   <Content />
 </BlogPostLayout>

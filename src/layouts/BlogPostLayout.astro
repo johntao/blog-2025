@@ -5,9 +5,11 @@ interface Props {
   title: string;
   pubDate: Date;
   tags: string[];
+  collection: string;
+  minutesRead: string;
 }
 
-const { title, pubDate } = Astro.props;
+const { title, pubDate, collection, minutesRead } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -19,7 +21,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 <BaseLayout title={title}>
   <article>
     <h2>{title}</h2>
-    <pre>
+    <pre>{collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {minutesRead}
 pub: {formattedDate}</pre>
     <hr>
 
