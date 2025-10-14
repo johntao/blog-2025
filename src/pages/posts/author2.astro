@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('author2');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Author 2 Posts">
+  <h2>Posts by Author 2</h2>
+
+  {sortedPosts.map((post, index) => (
+    <>
+      <article>
+        <h3><a href={`/posts/${post.slug}`}>{post.data.title}</a></h3>
+        <p><em>Published: {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+        <p>{post.data.description}</p>
+      </article>
+
+      {index < sortedPosts.length - 1 && <hr />}
+    </>
+  ))}
+
+  {sortedPosts.length === 0 && <p>No posts yet from Author 2.</p>}
+</BaseLayout>

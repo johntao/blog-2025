@@ -3,8 +3,15 @@ import { getCollection } from 'astro:content';
 import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
+  // Fetch entries from all author collections
+  const author1Entries = await getCollection('author1');
+  const author2Entries = await getCollection('author2');
+  const author3Entries = await getCollection('author3');
+
+  // Combine all entries
+  const allEntries = [...author1Entries, ...author2Entries, ...author3Entries];
+
+  return allEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

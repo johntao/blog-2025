@@ -2,7 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('blog');
+// Fetch posts from all author collections
+const author1Posts = await getCollection('author1');
+const author2Posts = await getCollection('author2');
+const author3Posts = await getCollection('author3');
+
+// Combine all posts and get recent 3
+const allPosts = [...author1Posts, ...author2Posts, ...author3Posts];
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
