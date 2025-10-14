@@ -7,7 +7,7 @@ interface Props {
   tags: string[];
 }
 
-const { title, pubDate, tags } = Astro.props;
+const { title, pubDate } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -19,16 +19,11 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 <BaseLayout title={title}>
   <article>
     <h2>{title}</h2>
-    <pre>tags: {tags.join(', ')}
+    <pre>
 pub: {formattedDate}</pre>
     <hr>
 
     <slot />
   </article>
 
-  <hr>
-
-  <nav>
-    <p><a href="/posts">← Back to all posts</a></p>
-  </nav>
 </BaseLayout>

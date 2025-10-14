@@ -7,19 +7,17 @@ const postSchema = z.object({
   tags: z.array(z.string()).default([]),
 });
 
-const author1 = defineCollection({
+const defaultCollection = defineCollection({
   type: 'content',
   schema: postSchema,
 });
 
-const author2 = defineCollection({
+const aiGeneratedCollection = defineCollection({
   type: 'content',
   schema: postSchema,
 });
 
-const author3 = defineCollection({
-  type: 'content',
-  schema: postSchema,
-});
-
-export const collections = { author1, author2, author3 };
+export const collections = {
+  default: defaultCollection,
+  'ai-generated': aiGeneratedCollection,
+};

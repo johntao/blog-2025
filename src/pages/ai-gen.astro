@@ -2,15 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Fetch posts from all author collections
-const author1Posts = await getCollection('author1');
-const author2Posts = await getCollection('author2');
-const author3Posts = await getCollection('author3');
-
-// Combine all posts and filter by tag
-const allPosts = [...author1Posts, ...author2Posts, ...author3Posts];
-const posts = allPosts
-  .filter(post => post.data.tags.includes('ai-generated'))
+// Fetch posts from ai-generated collection only
+const posts = (await getCollection('ai-generated'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 

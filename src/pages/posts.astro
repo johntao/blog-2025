@@ -2,13 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Fetch posts from all author collections
-const author1Posts = await getCollection('author1');
-const author2Posts = await getCollection('author2');
-const author3Posts = await getCollection('author3');
+// Fetch posts from all collections
+const defaultPosts = await getCollection('default');
+const aiGeneratedPosts = await getCollection('ai-generated');
 
 // Combine all posts and sort by date
-const allPosts = [...author1Posts, ...author2Posts, ...author3Posts];
+const allPosts = [...defaultPosts, ...aiGeneratedPosts];
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
