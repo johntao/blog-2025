@@ -7,6 +7,9 @@ export default defineConfig({
   // site: 'https://johntao.github.io',
   // base: 'blog-2025',
   site: 'https://www.johntao.dev',
+  build: {
+    format: 'file' // Creates about.html instead of about/index.html
+  },
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
