@@ -1,33 +1,32 @@
 ---
-title: "Temporarily Defeated In the Third Date"
-description: ""
+title: "Temporarily Defeated on the Third Day"
+description: "Failed a 30-day posting streak on day three; sharing struggles with Linux Mint and verbose LLM code."
 pubDate: 2025-10-16
 tags: []
 ---
 
-## Good News, AI Are Not Allowed to Complain
+## Good News: AIs Are Not Allowed to Complain
 
-Expected: straight posting articles in a 30 days streak
+**Expected:** posting articles for 30 consecutive days  
+**Actual:** defeated on the third day and started whining  
 
-Actual: defeated in the third date and start whining
+I just couldn't resist complaining. 🤣
 
-Just can't resist to the delicious complaint 🤣
+I was trying to post something constructive today — something about counting words recursively  
+in nested folders on a daily basis, just to see how my laziness outperforms productivity.  
 
-I was trying to post something constructive today. Something about counting words recursively  
-in a nested folders in daily-basis just to check how my laziness beats performance
+The takeaway is:
 
-The take away is:
+- I spent too much time installing Linux Mint on a dead Surface 3 tablet (which couldn't boot into Windows).
+  - The only real technical issue was running `apt update` to get the audio output working.
+  - The rest was just me being stupid.
+- The LLM wasn't giving me the quality of code I wanted.
+  - I tried prompting it with "implement it using the Unix piping philosophy,"
+  - but the result was still far too verbose.
+  - I finally got it right, but not before midnight.
 
-- I spent too much time installing Linux Mint on a dead Surface 3 Tablet (unable to boot into Windows)
-  - the only technical problem is to do `apt update` to make the audio output words
-  - the rest of it was just me acting stupid
-- LLM is not giving the quality code I wanted
-  - I tried to prompt "implement it with unix piping philosophy"
-  - but, the outcome is still way too verbose
-  - I got it right in the end. But, cannot make it before the midnight
+## **END OF COMPLAINT**
 
-END OF COMPLAINT
+Hope everyone enjoyed it. I'll try to post the word-counting script tomorrow.
 
-Hope everyone enjoy it. I will try to post the words counting script tomorrow.
-
-Teaser: it would be the most technical post ever made so far
+*Teaser: it might be the most technical post I've made so far.*
