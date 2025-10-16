@@ -1,15 +1,15 @@
 ---
 title: "Tasty Human-Written Post"
-description: "My take on AI vs human writing: they're good at keywords, I prefer random thoughts and humor. Gotta earn that living somehow!"
+description: "My take on AI vs. human writing: AI spreads words like an evangelist; I chase random thoughts and humor."
 pubDate: 2025-10-14
 tags: []
 ---
 
-## Human vs AI First Impression!
+## Human vs AI First Impression
 
 Note: This post is written by me :D
 
-I think the AI-generated one has already updated my current status (surprisingly!?) well
+I think the AI-generated (first three) posts has already updated my current status well
 
 The first thing I notice is that they're good at capturing the keywords and expand it to a certain extent
 
@@ -17,10 +17,10 @@ That's to say, they're quite good at delivering popular science in an evangelist
 
 What I observed is that these generated articles are not so shy at repeating the same concept all over again
 
-Whereas I as a human prefer my daily dose of random stuff.
+In contrast, I, as a human, prefer my daily dose of random stuff.
 
-Lastly, AI by default uses the different tone of language, I wonder if this is trainable.
+Lastly, AI’s tone differs from mine by default, but I wonder if it can be prompted to change.
 
-For my preference, I love to deliver concepts in concise emotional or humorous words.
+I love explaining things in short, punchy words — with a bit of emotion or humor.
 
-And I tend to keep it that way (not to train or prompt LLM too hard!) to earn myself a living 🤣
+I tend to not prompt the LLM too hard, so my own voice can still make me a living. 🤣

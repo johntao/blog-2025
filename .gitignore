@@ -1,6 +1,7 @@
-.idx
-.docs
-.logs
+.idx/
+.docs/
+.logs/
+.claude/
 
 # build output
 dist/
