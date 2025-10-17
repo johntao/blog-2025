@@ -81,7 +81,7 @@ This blog is tied to a coding project, hence the script does not count words fro
 And I refuse to do any workarounds at this point 🤣🤣
 (p.s. It would be 1000+ words on average if blog posts also counted)
 
-## END OF BED TIME STORY
+## **END OF BED TIME STORY**
 
 Phew! That's a lot of text in this article.
 
