@@ -1,6 +1,6 @@
 ---
 title: "Word Count: The Hello World In The Text Analysis Realm"
-description: ""
+description: "Building a word-counting script to track daily writing across scattered plain-text files. The background story and what I learned along the way."
 pubDate: 2025-10-17
 tags: []
 ---
@@ -10,28 +10,29 @@ tags: []
 **Spoiler**:  
 This is NOT the technical post you're looking for...😓  
 This article covers only the background story and the result.  
-I will leave the technical part until tomorrow
+I will leave the technical part until tomorrow.
 
-There are so many interesting topics I come up with after this post:
+This post sparked so many interesting topics I want to explore:
 
-- language comparison: find out the most delightful language to script
+- language comparison: finding the best language for scripting
 - keyword analysis (the area I haven't stepped into at all)
 - how to prompt LLM properly to get the simplest implementation
-- all the weirdness of bash scripting for a JS, CSharp background developer
-- the why and how using plain text to store your precious data
+- all the weirdness of bash scripting from a JS/C# developer's perspective
+- why and how to use plain text to store your precious data
 
 Hopefully, some of these will be covered in the future!
 
 ## Story Time
 
-I typed a lot everyday which includes daily journal (a single folder), various types of notes (nested folders) and codes.
+I type a lot every day, which includes daily journals (a single folder), various types of notes (nested folders), and code.
 
-These text are stored as plain-text files and scattered everywhere inside a folder named data.  
+These texts are stored as plain-text files and scattered everywhere inside a folder named data.  
 (p.s. I treat this folder as the main data source of my future PKM system)
 
-Folders may contain subfolders which grows into a deeply nested structure.
+Folders may contain subfolders which grow into a deeply nested structure.
 
-I run `wc -w` to track how many words I typed everyday, however, it only fits with daily journals.
+I run `wc -w` to track how many words I type every day; however, it only works with daily journals.  
+(for people who are confused, `wc -w` is the command I run in a terminal)
 
 I need to find an efficient way to count these nasty scattered files.
 
@@ -43,14 +44,14 @@ I've been fascinated with the concept of mining useful information from my knowl
 
 This type of task is also known as text-analysis (again, according to some LLM).
 
-That's why I hooked up with this idea, and trying to implement in the most minimal and maintainable way.
+That's why I got hooked on this idea and tried to implement it in the most minimal and maintainable way.
 
-These are the prompts that generate better outcome:
+These are the prompts that generated better outcomes:
 
 - implement it with "Unix Tools Philosophy"
-- given a basic commands such as `wc -w`
-  - then, followed by your requirements
-  - and, asked AI to complete your commands
+- Start with a basic command such as `wc -w`
+  - then, follow it with your requirements
+  - and, ask AI to complete your command
 
 ## The Outcome
 
@@ -70,22 +71,22 @@ These are the prompts that generate better outcome:
 251010;421;7
 ```
 
-It seems in average I typed around 700 words per day, excluding the blog posts 😓
+It seems on average I type around 700 words per day, excluding the blog posts 😓
 
-The script only count words in the main data folder, and I haven't figured out a proper way  
+The script only counts words in the main data folder, and I haven't figured out a proper way
 to deal with the text stored in the coding folders.
 
 This blog is tied to a coding project, hence the script does not count words from my posts.
 
 And I refuse to do any workarounds at this point 🤣🤣
-(p.s. It would be 1000+ words in average if blog posts also count
+(p.s. It would be 1000+ words on average if blog posts also counted)
 
 ## END OF BED TIME STORY
 
 Phew! That's a lot of text in this article.
 
-One of my goal is to keep reading time of each blog post less than three minutes!
+One of my goals is to keep the reading time of each blog post less than three minutes!
 
-Hope someone may already learned something useful at this point.
+I hope someone has already learned something useful at this point.
 
-See you in the next technical part! 🤓
+See you in the upcoming technical part! 🤓
