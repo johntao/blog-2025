@@ -1,19 +1,19 @@
 ---
 title: "Temporarily Defeated on the Third Day"
-description: "Failed a 30-day posting streak on day three; sharing struggles with Linux Mint and verbose LLM code."
+description: "Failed a 30-day posting streak on day three(?); sharing struggles with Linux Mint and verbose LLM code."
 pubDate: 2025-10-16
 tags: []
 ---
 
-## Good News: AIs Are Not Allowed to Complain
+## Good News: Complaints Also Count
 
 **Expected:** posting articles for 30 consecutive days  
 **Actual:** defeated on the third day and started whining  
 
-I just couldn't resist complaining. 🤣
-
 I was trying to post something constructive today — something about counting words recursively  
 in nested folders on a daily basis, just to see how my laziness outperforms productivity.  
+
+Meanwhile, I also planned to revive my un-bootable tablet today (solving a fossilized to-do is always good for mental health).
 
 The takeaway is:
 
@@ -27,6 +27,6 @@ The takeaway is:
 
 ## **END OF COMPLAINT**
 
-Hope everyone enjoyed it. I'll try to post the word-counting script tomorrow.
+Hope everyone enjoyed it 🤣. I'll try to post the word-counting script tomorrow.
 
 *Teaser: it might be the most technical post I've made so far.*
