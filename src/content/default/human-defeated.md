@@ -5,10 +5,10 @@ pubDate: 2025-10-16
 tags: []
 ---
 
-## Good News: Complaints Also Count
-
 **Expected:** posting articles for 30 consecutive days  
 **Actual:** defeated on the third day and started whining  
+
+## Good News: Complaints Also Count
 
 I was trying to post something constructive today — something about counting words recursively  
 in nested folders on a daily basis, just to see how my laziness outperforms productivity.  

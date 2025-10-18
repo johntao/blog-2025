@@ -3,37 +3,21 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  // Fetch entries from all collections
-  const defaultEntries = await getCollection('default');
-  const aiGeneratedEntries = await getCollection('ai-generated');
-
-  // Map entries with collection info
-  const rtn = [
-    ...defaultEntries.map(entry => ({
-      params: { slug: entry.slug },
-      props: { entry, nextPost: null, prevPost: null },
-    })),
-    ...aiGeneratedEntries.map(entry => ({
-      params: { slug: entry.slug },
-      props: { entry, nextPost: null, prevPost: null },
-    })),
-  ];
-
-  // Sort entries by date (newest first)
-  const sortedEntries = rtn.sort((a, b) =>
-    b.props.entry.data.pubDate.valueOf() - a.props.entry.data.pubDate.valueOf()
-  );
-
-  // Assign nextPost and prevPost for each entry
-  sortedEntries.forEach((item, index) => {
-    item.props.nextPost = index > 0 ? sortedEntries[index - 1].props.entry : null;
-    item.props.prevPost = index < sortedEntries.length - 1 ? sortedEntries[index + 1].props.entry : null;
-  });
-
-  return sortedEntries;
+  return [...await getCollection('default'), ...await getCollection('ai-generated')]
+    .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map((entry, i, arr) => {
+      const nn = arr[i - 1];
+      const pp = arr[i + 1];
+      const next = nn && ({ slug: nn.slug, title: nn.data.title });
+      const prev = pp && ({ slug: pp.slug, title: pp.data.title });
+      return {
+        params: { slug: entry.slug },
+        props: { entry, next, prev },
+      };
+    });
 }
 
-const { entry, nextPost, prevPost, } = Astro.props;
+const { entry, next, prev, } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
 
 const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
@@ -57,12 +41,12 @@ pub: {formattedDate}</pre>
   <hr>
 
   <nav>
-    <p>Next: {nextPost ?
-      <a href={`/posts/${nextPost.slug}`}>{nextPost.data.title}</a> :
+    <p>Next: {next ?
+      <a href={`/posts/${next.slug}`}>{next.title}</a> :
       <strong>You've reached the newest post</strong>}
     </p>
-    <p>Prev: {prevPost ?
-      <a href={`/posts/${prevPost.slug}`}>{prevPost.data.title}</a> :
+    <p>Prev: {prev ?
+      <a href={`/posts/${prev.slug}`}>{prev.title}</a> :
       <strong>You've reached the oldest post</strong>}
     </p>
   </nav>
