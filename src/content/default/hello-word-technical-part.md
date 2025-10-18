@@ -1,23 +1,23 @@
 ---
-title: "Word Count: The Hello World In The Text Analysis Realm Part 2"
-description: ""
+title: "Word Count: The 'Hello World' of Text Analysis, Part 2"
+description: "Fighting LLM overkill to build a simple bash script. Turns out file metadata is the secret sauce."
 pubDate: 2025-10-18
 tags: []
 ---
 
 ## Prerequisite
 
-This article is for readers who've finished part 1 and get interested to the technical part.  
-Readers should have already known the following concepts:
+This article is for readers who've finished part 1 and are interested in the technical part.
+Readers should already know the following concepts:
 
 - bash, terminal
-- unix Philosophy
-- commonly use POSIX tools
+- Unix Philosophy
+- commonly used POSIX tools
 
-I would skip explain syntax intentionally, and focusing on the design/mind flow.  
-We are living in a world where answers are no longer valuable.  
-One can always find an answer on the internet.  
-Asking the right questions or having the mindset are more valuable nowadays.
+I will intentionally skip explaining syntax, and focus on the design/thought process.
+We are living in a world where answers are no longer valuable.
+One can always find an answer on the internet.
+Asking the right questions or having the right mindset is more valuable nowadays.
 
 ## First Thing First: The Sauce
 
@@ -44,7 +44,7 @@ sed -i "1i$result" ~/chronicle/wc-global
 
 Brief:
 
-- use find to get all the files having modified date greater than today
+- use find to get all the files with a modified date greater than or equal to today
 - run word count on each file
 - get previous word count from a custom attribute
   - this is the case when you edited an older file today
@@ -62,47 +62,45 @@ The very first one
 
 ```txt
 I want to scan all the text files recursively in the current folder.
-Here's the requirements:
-* scan all files that is modified on given date
+Here are the requirements:
+* scan all files that are modified on a given date
 * pipe all the text to wc to get the word count
-* sum up all the word count
+* sum up all the word counts
 * written in bash script
 ```
 
-Briefly commenting all the follow-up questions I've asked:
+Brief comments on all the follow-up questions I asked:
 
-- LLM gave long scripts that was too hard to comprehend
+- LLM gave long scripts that were too hard to comprehend
 - spent some time working on the syntax and trying to compose it myself piece by piece
-- start questioning the algorithm. realize the role of created date, modified date and delta
-- back to the basic, double check the limitation of using a single date value in this algorithm
-- accept the limitation, make the call to use the simplest solution
-- figure out the last piece of the puzzle is to use custom attribute to store the last state
-- make my way to the result and also learn the prompt tips mentioned in part 1
+- started questioning the algorithm. Realized the role of created date, modified date and delta
+- went back to the basics, double-checked the limitation of using a single date value in this algorithm
+- accepted the limitation and decided to use the simplest solution
+- figured out the last piece of the puzzle: use custom attribute to store the last state
+- made my way to the result and also learned the prompt tips mentioned in part 1
 
 ### Retrospective
 
-I start my planning phases using Claude Web client, and then, switch to Claude CLI  
-once I am comfortable working with the generated scripts.
+I started my planning phase using Claude Web client, and then switched to Claude CLI
+once I was comfortable working with the generated scripts.
 
-Besides the overkill scripts, there were also some bash quirky syntax that I am not aware of.  
+Besides the overkill scripts, there was also some quirky bash syntax that I was not aware of.
 I tend to understand all the quirks before running the scripts or adding new features.
 
-LLM kept generating complicated scripts that I started to wonder what am I trying to solve.
+LLM kept generating complicated scripts that made me start to wonder what I was trying to solve.
 
-LLM do help me through the process of inspecting all the limitation and the essential parts  
-of the algorithm. (still, explain in an over-engineering language)
+LLM did help me understand the limitations and essential parts of the algorithm,  
+though it used overly complex language.
 
-Finally I come up with the idea to store the "state" in the metadata of a file  
-which was the last piece of the puzzle. Everything goes smooth afterward.
+Finally I came up with the idea to store the "state" in the metadata of a file
+which was the last piece of the puzzle. Everything went smoothly afterward.
 
 ## AI Pros & Cons
 
-### Overkill Script
-
-The script was written in a formal way which split the code into sections including arguments
-and errors check. This is practical in a large developer team, but clumsy for a personal scripting project.
-
 ### Overkill Solution
+
+The script was written formally with separate sections for arguments and error checks.  
+This is practical for large teams, but overkill for a personal project.
 
 LLM gave a complete solution including:
 
@@ -112,34 +110,42 @@ LLM gave a complete solution including:
 
 These are all good options if I have the following requirements:
 
-- users require query arbitrary history data multiple times, and the result needs to be idempotent
-  - which is not the case, I run the script in daily basis, and keep all the records in one place
-  - i.e. NO need to concern about querying or idempotence
-- users require to track detailed modification such as words deletion or file removal
-  - in my case, I count addition exclusively
+- users require querying arbitrary history data multiple times, and the result needs to be idempotent
+  - which is not the case. I run the script on a daily basis, and keep all the records in one place
+  - i.e. NO need to worry about querying or idempotence
+- users require tracking detailed modifications such as word deletion or file removal
+  - in my case, I count additions exclusively
 
-Things get clearer once I made up my mind to set the scope of this project to minimum.
+Things got clearer once I decided to keep the project scope minimal.
 
-LLM also helps on implementing best practice in a text-based data store system, we could explore  
+LLM also helped with implementing best practices in a text-based data store system. We could explore
 the idea in another article.
 
 ### Failed To Deliver Simple Solution
 
-This one is debatable, I felt like giving accurate prompts should help LLM better solution.
+This one is debatable. I thought giving accurate prompts would help the LLM deliver simpler solutions.
 
-Also, I felt like simplicity is somehow an aesthetic take.
+But maybe simplicity is just a matter of taste.
 
-Cannot tell if it was me being grumpy or LLM failed to express minimalism 😓
+Can't tell if it was me being grumpy or LLM failed to express minimalism 😓
 
 ### Repeating Themselves For The Same Mistake
 
-This one is hilarious and interesting in the same time.
+This one is hilarious and interesting at the same time.
 
-I observed LLM making the same mistake and then immediately correct themselves in the same  
-response twice! (same question and behavior happened on different LLM, each happened once)
+I saw the LLM make the same mistake and then immediately correct itself—twice in the same response!  
+(This happened with two different LLMs, once each.)
 
-I cannot tell if there's another thread to monitor the response, and correct themselves  
+I cannot tell if there's another thread to monitor the response and correct themselves
 dynamically during a response.
 
-If not, it would be ridiculous if LLM already knew the answer, and still deliberately  
+If not, it would be ridiculous if LLM already knew the answer, and still deliberately
 threw out a wrong answer first 🤣🤣
+
+## **End Of The Article**
+
+Enough words for me today 😮‍💨
+
+It turns out skipping all technical/syntax explanations can still be really lengthy!
+
+Hope you learned a thing or two here. See you in the next one 🤓

@@ -1,5 +1,5 @@
 ---
-title: "Word Count: The Hello World In The Text Analysis Realm Part 1"
+title: "Word Count: The 'Hello World' of Text Analysis, Part 1"
 description: "Building a word-counting script to track daily writing across scattered plain-text files. The background story and what I learned along the way."
 pubDate: 2025-10-17
 tags: []
