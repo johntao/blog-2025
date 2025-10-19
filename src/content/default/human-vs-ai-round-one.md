@@ -42,4 +42,4 @@ but it immediately increases the work of evaluation. (more metrics, more evil)
 
 Lastly, "trend" is not the first priority of this blog. My interest seldom overlaps with the shiny things.
 
-That's all, throwing out my ideas here helps me sleep better.
+That's all, throwing out my ideas here helps me sleep better. 😌
