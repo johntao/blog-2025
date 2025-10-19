@@ -9,7 +9,7 @@
   --color-blue: #84b5c6;
   --color-red: #c45456;
   --color-green: #93a65b;
-  --color-purple: #ad749f;
+  --color-purple: #f191e1;
   --color-grey: #404040;
 }
 
@@ -166,6 +166,16 @@ pre {
   overflow-x: auto;
   margin: 1em 0;
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* Inline code */
+code:not(pre code) {
+  background-color: var(--color-bg-black-deep);
+  color: var(--color-yellow);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
 
 /* Blockquotes */
