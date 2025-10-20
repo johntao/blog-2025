@@ -5,8 +5,7 @@ pubDate: 2025-10-19
 tags: []
 ---
 
-There are so many words I can use to make my point directly:  
-information explosion, tutorial hell, knowledge anxiety, imposter syndrome...
+There are many terms for this struggle: information explosion, tutorial hell, knowledge anxiety, imposter syndrome... all describing different aspects of being overwhelmed by the constant flow of information.
 
 It's the phenomenon where you can't just keep watching technical videos on YouTube.  
 (assuming your main information source is videos from any platform)
@@ -21,17 +20,16 @@ in the last month, and your tools used in the previous project are now officiall
 
 That's pretty much how information fatigue sounds to a regular developer.
 
-As an ordinary developer, what I can do is find the balance between learning new things
-and consolidating my knowledge.
+As an ordinary developer, what I can do is find the balance between learning new things and consolidating my knowledge.  
 
 This reminds me of the Chinese quote "學而不思則罔, 思而不學則殆" from "論語" which means  
 "To learn without reflection is wasteful; to reflect without learning is dangerous." in English.  
-Thanks to my friend Alvis for sharing this quote when I was confused about my career 🤜🤛
+Shout out to my friend Alvis for sharing this quote when I was confused about my career 🤜🤛
 
-Hence, it is wise to check all the information sources you used, and examine how you digest them,  
-as well as what you feel about them.
+Hence, it is wise to check all the information sources you used, and examine how you digest them,
+as well as what you feel about them. By understanding which sources drain me (high fatigue) versus energize me (low fatigue), I can make better choices about where to spend my attention.
 
-Here are my honest reviews of all the quality sources I've dug into:
+Here are my honest reviews of all the quality sources I've dug into as an example—I encourage you to do the same audit with your own sources:
 (listed by media platform, ordered by frequency of use)  
 (p.s. I excluded Google Search and LLM intentionally, since they're just the entry point)
 
@@ -118,9 +116,9 @@ Knowing this fact might help people get rid of the anxiety hopefully.
 
 ## Developer Blogs (Fatigue Level: 1 out of 3)
 
-This is the material I miss the most because I don't read that much.
+This is the material I've been neglecting because I don't read that much.
 
-Now that I've started my 30 days writing challenge, it would be interesting to read other developers' blogs.
+Now that I've started my 30 days writing challenge, I realize I should engage more with other developers' blogs for inspiration and perspective.
 
 One can find developers' blogs via [uses tech](https://uses.tech/), or simply google search or ask LLM.
 p.s. uses tech is mostly front-end centric
