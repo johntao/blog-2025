@@ -1,6 +1,6 @@
 ---
 title: "Information Fatigue"
-description: ""
+description: "A developer's honest reflection on information overload, tutorial hell, and finding balance between learning new things and consolidating knowledge. Includes fatigue ratings for different tech learning sources."
 pubDate: 2025-10-19
 tags: []
 ---
@@ -8,7 +8,7 @@ tags: []
 There are so many words I can use to make my point directly:  
 information explosion, tutorial hell, knowledge anxiety, imposter syndrome...
 
-It is the phenomenon that you cannot simply keep watching technical videos on YouTube.  
+It's the phenomenon where you can't just keep watching technical videos on YouTube.  
 (assuming your main information source is videos from any platform)
 
 Sometimes you just need to turn off your brain and watch cat videos or simply listen to some music.
@@ -21,18 +21,18 @@ in the last month, and your tools used in the previous project are now officiall
 
 That's pretty much how information fatigue sounds to a regular developer.
 
-What I as an ordinary developer could do is to find the balance between learning new things  
-and consolidating myself.
+As an ordinary developer, what I can do is find the balance between learning new things
+and consolidating my knowledge.
 
 This reminds me of the Chinese quote "學而不思則罔, 思而不學則殆" from "論語" which means  
 "To learn without reflection is wasteful; to reflect without learning is dangerous." in English.  
-Shout out to my friend Alvis for sharing the Chinese quote when I was confused about my career 🤜🤛
+Thanks to my friend Alvis for sharing this quote when I was confused about my career 🤜🤛
 
 Hence, it is wise to check all the information sources you used, and examine how you digest them,  
 as well as what you feel about them.
 
-Here I started my honest reviews of all the quality sources I have dug into:
-(listed by media platform, ordered by my use frequency descending)  
+Here are my honest reviews of all the quality sources I've dug into:
+(listed by media platform, ordered by frequency of use)  
 (p.s. I excluded Google Search and LLM intentionally, since they're just the entry point)
 
 ## Podcast (Fatigue Level: 1 out of 3)
@@ -41,12 +41,12 @@ This is the tranquil dojo for me to learn something new.
 
 I always listen to podcasts while I'm commuting.
 
-I felt like putting less effort into learning things (i.e. no eyes needed), making it easy to sustain.
+I feel like it takes less effort to learn things this way (i.e. no eyes needed), making it easier to sustain.
 
 There were cases that I just want to listen to music or sing while commuting, otherwise, I seldom  
 skip my news feed.
 
-Name a few podcaster I am digging (no particular order):
+Here are a few podcasters I'm into (in no particular order):
 
 - [Front-End-Fire](https://front-end-fire.com/): the lovely trio where they cover different types of news in the front end world
   - general big news, lightning news
@@ -63,7 +63,7 @@ Name a few podcaster I am digging (no particular order):
   - they are the friendly wise elders we all need (I am in my 30s, btw)
   - time flies when they talk about the history of the IT industry (in a good way 🎷)
 - [Scott Hanselman](https://www.hanselman.com/): the all-round (integrated) senior Microsoft developer one must know
-  - he is proactively having conversations with different backgrounds people
+  - he proactively has conversations with people from different backgrounds
   - listening to those conversation is always delightful and enlightening
 
 ## Videos (Fatigue Level: 3 out of 3)
@@ -78,14 +78,14 @@ However, it is still fun to watch people sharing what's inside their Linux toolb
 
 This one is so refreshing when it first came up in my feed.
 
-I was surprised by the fact that a video of 100 seconds length can still be so much informative.
+I was surprised that a 100-second video could still be so informative.
 
 The content was legit, smooth and humorous at the same time that I cannot imagine myself doing
 the same quality stuff.
 
 ## Discord (Fatigue Level: 1 out of 3)
 
-My take on discord is that this is the place whenever I cannot find an answer myself on the internet.  
+My take on Discord is that it's the place to go when I can't find an answer on the internet myself.  
 
 There were also discussion about how discord's content is not searchable on the internet. I don't have  
 a solution for this either.
@@ -108,7 +108,7 @@ Although I am mostly an open source user myself, I still find the numbers lead t
 
 The worries about not using the most legit tools, not being on the trends, afraid of being obsolete... etc.
 
-Not even mention I also have a public GitHub page! 😨
+Not to mention I also have a public GitHub page! 😨
 
 ## Internet Tier List (Fatigue Level: 2 out of 3)
 
@@ -118,9 +118,22 @@ Knowing this fact might help people get rid of the anxiety hopefully.
 
 ## Developer Blogs (Fatigue Level: 1 out of 3)
 
-It is the material I missed a lot because I don't read that much.
+This is the material I miss the most because I don't read that much.
 
 Now that I've started my 30 days writing challenge, it would be interesting to read other developers' blogs.
 
-One can find developers' blogs via [uses tech](https://uses.tech/), or simply google search or ask LLM.  
+One can find developers' blogs via [uses tech](https://uses.tech/), or simply google search or ask LLM.
 p.s. uses tech is mostly front-end centric
+
+---
+
+## Final Thoughts
+
+Information fatigue is real, and it's not going away.
+
+But here's what I've learned: **it's okay to not know everything**.
+
+The key is being intentional about your information diet—choose sources that match your learning style,  
+limit high-fatigue sources, and remember that learning without reflection is just noise.
+
+We're not in a race to consume the most content; we're here to build things and grow sustainably as developers.
