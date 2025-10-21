@@ -1,7 +1,7 @@
 ---
 title: "Information Fatigue"
 description: "A developer's honest reflection on information overload, tutorial hell, and finding balance between learning new things and consolidating knowledge. Includes fatigue ratings for different tech learning sources."
-pubDate: 2025-10-19
+pubDate: 2025-10-20
 tags: []
 ---
 
@@ -122,6 +122,7 @@ Now that I've started my 30 days writing challenge, I realize I should engage mo
 
 One can find developers' blogs via [uses tech](https://uses.tech/), or simply google search or ask LLM.
 p.s. uses tech is mostly front-end centric
+bonus: [daily dev](https://daily.dev/) is another amazing place to find various reading materials
 
 ---
 
