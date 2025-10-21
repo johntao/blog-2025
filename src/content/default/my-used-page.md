@@ -7,13 +7,13 @@ tags: []
 
 I mentioned the [uses page](https://uses.tech/) in the previous article.
 
-It was fun watching the statistic numbers to know what other people use as their daily drive.
+It was fun watching the statistic numbers to know what other people use as their daily driver.
 
 However, it is important to know the sample size whenever talking about statistics.
 
-"Uses page" currently includes ~900 records when the time I wrote this article.
+"Uses page" currently includes ~900 records at the time I wrote this article.
 
-In compare to other famous surveys in the software development area:
+In comparison to other famous surveys in the software development area:
 
 - [Stack Overflow: Developer Survey 2024](https://survey.stackoverflow.co/2024/)
   - +65,000 responses
@@ -25,12 +25,12 @@ In compare to other famous surveys in the software development area:
 What differs from these surveys is that you can find more details about the hardware setup or OS-related stuff in "uses page".  
 (e.g. keyboard, ergonomic chair, which Linux distro...)
 
-Furthermore, one would had a chance to glance how other developers built their personal website, including their tech stacks.
+Furthermore, one would have a chance to glance how other developers built their personal website, including their tech stacks.
 
 The low popularity of "uses page" is due to the fact that:
 
-1. Not every developers have a personal website (mostly front-end focus developers)
-2. Even the developer have one, they might not beware of the existence of such movement
+1. Not every developer has a personal website (mostly front-end focus developers)
+2. Even if a developer has one, they might not be aware of the existence of such movement
 
 That's to say I am not going to contribute to the community either 🤣🤣
 
@@ -38,18 +38,18 @@ Just shout out to the movement and probably someone read this article would love
 
 ## The Used Page
 
-I felt that in a introspective view, reviewing how many tools I have used is more valuable.
+I felt that in an introspective view, reviewing how many tools I have used is more valuable.
 
 Here I try to list the tools I've used and make them into three categories:  
 battle tested (used in my previous job), personal usage, current learning.
 
-I will also split tools into smaller groups for better reading experience, and  
-mark the tool with either 'G' as good or 'F' as fair which indicate how much time I've spent on it.  
-Markers are prefix on each item just to save some precious space  
+I will also split tools into smaller groups for better reading experience, and
+mark the tool with either 'G' as good or 'F' as fair which indicate how much time I've spent on it.
+Markers are prefixed on each item just to save some precious space  
 extra notes:  
 1. I skipped 'excellent' because I don't need excellent in this article
 2. markers are given in the sense of comparing only on myself, it doesn't relate to other developers at all
-3. I skipped given markers on tools that is too tedious or below the score of 'Fair'
+3. I skipped giving markers on tools that are too tedious or below the score of 'Fair'
     - however, I will still include them for the record
 4. lastly, I probably forget a few items since 8+ years development experience means a lot
 
@@ -74,7 +74,7 @@ Here we GO!
 - (G) Material UI: the legendary UI since 2014. One might be surprised for how much stuff you can abstract from an input field.
 - (G) React Admin: the fantastic project to learn how to abstract an admin site properly. also shout out to the awesome doc site
 - (F) Telerik Kendo: the OG commercial UI library (first launch in 2011). the tool has its place in the .NET eco-system
-  - thus, I am fortunated enough to encounter it twice in my career
+  - thus, I am fortunate enough to encounter it twice in my career
 - (F) CKEditor: first launched in 2003. met this tool twice in my career, seems to be the go-to option for WYSIWYG feature
 
 ### Web Full-Stack & Application
@@ -91,19 +91,19 @@ I use these tools to do cross service providers automation or some simple integr
 - (F) Playwright: amazing tool, have built-in browser, tracer (debugger), and run different browser parallel. just amazing.
 - (F) Selenium: make sure to set your webdriver correct!
 - (F) AutoIt: still remember my first impression. it's amazing how much things you can do via this tool.
-  - I once use this tool to enhance my live demo, hotkey to activate descriptive popup just like how you do animaitons in ppt
-- (F) AutoHotkey: AutoIt spin-off. I don't use it that much, only know the fact that it make the syntax extraordinary concise.
+  - I once use this tool to enhance my live demo, hotkey to activate descriptive popup just like how you do animations in ppt
+- (F) AutoHotkey: AutoIt spin-off. I don't use it that much, only know the fact that it makes the syntax extraordinary concise.
 - (F) NUnit: I know the value of unit tests. just don't have enough TDD experience in my career
 
 ### Desktop & Other Platform
 
 - (G) ConsoleApp: my favorite interface for quick admin automation. however, I have a hunch that Powershell might do a better job.
-- (F) WinForm: most of my colleagues love to developed their automation stuff on WinForm. I guess it is just a matter of preference
+- (F) WinForm: most of my colleagues love to develop their automation stuff on WinForm. I guess it is just a matter of preference
 - Android, Unity
 
 ### Back-end & Application
 
-- (G) Entity Framework (+Core): I loved it when I first use it. I was the first adapter to use tons of LINQ in my workspace.
+- (G) Entity Framework (+Core): I loved it when I first used it. I was the first adopter to use tons of LINQ in my workspace.
   - once you get used to LINQ, there's no reason to reject EF
   - the only GOTCHA is how you ease the process whenever a performance bottleneck hit
 - (G) HtmlAgilityPack: I know the existence of XPATH from this tool. It's fascinating how CSS Selector differs from XPATH
@@ -111,8 +111,8 @@ I use these tools to do cross service providers automation or some simple integr
 - (G) Dapper: it's the tool for developer felt uncomfortable to use too much LINQ in their codebase or developers who make performance as the first citizen
 - (G) ADO.NET: the good old friend. I once dived into all the dataset and adapter API. they sure make something robust except for weak types.
 - (G) ASP.NET Web API: use it like a breeze. however, one may still get into trouble if they wish to strongly type all the filtering criteria.
-  - also, it have similar problem like MVC where middleware might be messy
-- (G) Postman: first launch in 2012. every developers go-to tool to test out various API endpoints.
+  - also, it has similar problems like MVC where middleware might be messy
+- (G) Postman: first launch in 2012. every developer's go-to tool to test out various API endpoints.
   - I have experience using the scripting feature to compose integration tests
   - however, I doubt it would be the best practice in the era of LLM
 - (F) SignalR: I didn't use it that much. from what I know, it just works
@@ -121,23 +121,23 @@ I use these tools to do cross service providers automation or some simple integr
 
 ### Language
 
-- (G) CSharp: the one that earn me a living. sometimes, I felt like my knowledge about CSharp is over-qualified for the job
+- (G) CSharp: the one that earns me a living. sometimes, I felt like my knowledge about CSharp is over-qualified for the job
   - here's how: developers should stick with their team coding convention.
   - solving problems with packages seems more acceptable than using delicate language features, then do it yourself
   - anyway, I don't use CSharp that much these days, but I am still strongly interested how it evolve
-- (G) JavaScript: another language that feed me. I don't have much complains that it is not a static typed language
+- (G) JavaScript: another language that feed me. I don't have many complaints that it is not a static typed language
   - what I can recall is that it was fascinating to make things work in the browser, and everyone can open the devtool to debug
-  - I am not yet reach the guru level though, 'this' and deeply proto-chain still confused me
-  - not to mention the significant semi-colon and parentheses emitted by the minifier, these always catch me off guard
+  - I have not yet reached the guru level though, 'this' and deeply proto-chain still confused me
+  - not to mention the significant semi-colon and parentheses omitted by the minifier, these always catch me off guard
 - (G) TypeScript: legendary language designed by the guy who also designed CSharp.
   - it is probably the very first time I know that a language could have so many utilities and operators to interact with a 'type'
   - not to mention the legends said type system of typescript on its own is Turing Complete, just amazing!
 - (G) Regex: probably one of my best skills among group of developers. however, I haven't read the book "Mastering Regular Expressions"
   - hope I will complete the book someday, before that, I will just identify myself a layman
-- (G) LINQ: the beautiful syntax that imbue SQL-like syntax into CSharp word. the one who designed this must be a genius
+- (G) LINQ: the beautiful syntax that imbue SQL-like syntax into CSharp world. the one who designed this must be a genius
   - noted that functional syntax is different from query syntax. query syntax is a subset of functional syntax
   - query syntax shine in cases of simple join or continuation
-- (F) Powershell: I don't use it enough in my job experience. cuz I was too fascinating with CSharp and console application
+- (F) Powershell: I don't use it enough in my job experience. cuz I was too fascinated with CSharp and console application
   - hopefully, I will make my own cmdlet one day
 - (F) Python: the hotshot programming language. I admit the syntax is indeed graceful that resonate to my pursue of minimalism
   - however, I don't want to use it that much. just call me a rebel
@@ -145,7 +145,7 @@ I use these tools to do cross service providers automation or some simple integr
 ### DB
 
 - (G) SQL Server: good old relational database. One must know how to debug missing JOIN records or know when the JOIN statements would cause cartesian explosion
-- (G) Elasticsearch: the very first nodql database I used. enlighten me with tons of concepts
+- (G) Elasticsearch: the very first NoSQL database I used. enlighten me with tons of concepts
   - e.g. DSL, text-processing, tokenization, search engine, distributed system, Lucene
 - (G) SSMS: the default graphic client everyone used to connect SQL Server. (compare to DBeaver) good at alter table schema with advanced feature
 - (G) DBeaver: the open source alternative for connecting databases. (compare to SSMS) rich user experience
@@ -158,7 +158,7 @@ I use these tools to do cross service providers automation or some simple integr
 I don't do much fancy stuff in the DevOps area. Most of the time I just deploy, and make sure it work, then leave.
 
 - (G) IIS: activate (install) a few options, setup the site, port, pool and folder. switch 32 bit on and off. That's all.
-- (G) Task Scheduler: too simple to type extra notes. just make sure you create an obvious folder let your teammates know where to find it
+- (G) Task Scheduler: too simple to type extra notes. just make sure you create an obvious folder and let your teammates know where to find it
 - (G) Windows: it's okay for me. However, if one heavily relied on non-dotnet open source eco-system. You might be upset.
 - (F) GitHub Action: extremely rich eco-system. I only use the basic stuff
 - (F) Docker: just use it. nothing special. (I use docker to host the ELK solution, btw)
@@ -166,7 +166,7 @@ I don't do much fancy stuff in the DevOps area. Most of the time I just deploy, 
 
 ### IDE & Editor & Extra Goodies
 
-- (G) VSCode: I am quite an early adapter. I believe I start using it since 2016. No sweat no complain.
+- (G) VSCode: I am quite an early adopter. I believe I start using it since 2016. No sweat no complain.
   - the only GOTCHA is that I think VSCodeVim wasn't that good back in the days
 - (G) Visual Studio: VsVim is better than VSCodeVim IMHO. I am the basic users. Nothing fancy stuff to shout out here.
 - (F) ILSpy: reminds me when debugging production issue. one of the step is to use ILSpy check if I've deployed the wrong version. true story.
