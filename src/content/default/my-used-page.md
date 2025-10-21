@@ -1,6 +1,6 @@
 ---
 title: "My Used Page, Part 1"
-description: ""
+description: "An introspective review of tools and technologies I've used throughout my 8+ years of development experience. Part 1 covers battle-tested tools from my previous jobs, including web development, databases, and DevOps technologies."
 pubDate: 2025-10-21
 tags: []
 ---
@@ -29,24 +29,25 @@ Furthermore, one would have a chance to see how other developers built their per
 
 The low popularity of "uses page" is due to the fact that:
 
-1. Not every developer has a personal website (mostly front-end focus developers)
+1. Not every developer has a personal website (though those who do are mostly front-end focused developers)
 2. Even if a developer has one, they might not be aware of the existence of such movement
 
-That's to say I am not going to contribute to the community either 🤣🤣
+That's to say I am not going to make a dedicated `/uses` page for now (at least not for 2-3 months) 🤣🤣
 
-Just a shout out to the movement, and maybe someone reading this article would love to join them.
+Just a shout out to the movement though, and maybe someone reading this article would love to join them.
 
 ## The Used Page
 
 I felt that in an introspective view, reviewing how many tools I have used is more valuable.
 
 Here I try to list the tools I've used and organize them into three categories:  
-battle tested (used in my previous job), personal usage, current learning.
+battle tested (used in my previous jobs), personal usage, current learning.
 
-I will also split tools into smaller groups for a better reading experience, and
-mark each tool with either 'G' as good or 'F' as fair which indicates how much time I've spent on it.
+I will also split tools into smaller groups for a better reading experience, and  
+mark each tool with either 'G' as good or 'F' as fair which indicates how much time I've spent on it.  
 Markers are prefixed on each item just to save some precious space  
-extra notes:  
+
+Extra notes:  
 1. I skipped 'excellent' because I don't need an 'excellent' marker in this article
 2. markers are based only on my own experience, they don't compare to other developers at all
 3. I skipped giving markers on tools that are too tedious or below the score of 'Fair'
@@ -55,7 +56,7 @@ extra notes:
 
 Here we GO!
 
-## Battle Tested (Used In Previous Job)
+## Battle Tested (Used In Previous Jobs)
 
 ### Web Front-end
 
@@ -67,7 +68,7 @@ Here we GO!
 - (F) TanStack Suite: the TanStack stuff gave you the knowledge of extracting functional logic from the UI
 - (F) TailwindCSS: I started using it without any preprocessor experience; I can say the DX is like a breeze
 - (F) Vite: I started using it without any webpack experience; the DX is a piece of cake
-- Jest, AngularJS, Vue, Liquid, Bootstrap
+- Jest, AngularJS, Vue, Liquid
 
 ### Web Front-end UI Component
 
@@ -76,11 +77,13 @@ Here we GO!
 - (F) Telerik Kendo: the OG commercial UI library (first launch in 2011). the tool has its place in the .NET eco-system
   - thus, I am fortunate enough to encounter it twice in my career
 - (F) CKEditor: first launched in 2003. encountered this tool twice in my career, seems to be the go-to option for WYSIWYG feature
+- Bootstrap
 
 ### Web Full-Stack & Application
 
-- (G) ASP.NET WebForm: viewstate, postback, code-behind, UpdatePanel, and the beautiful life cycle chart that I used to set as my wallpaper. good old days
-- (G) ASP.NET MVC: cultural shock migrating from WebForm to MVC, but got used to it once you figure out how controller and routing works. the messiest part is usually the over-complicated middleware setup
+- (G) ASP.NET WebForm: viewstate, postback, code-behind, UpdatePanel, and the beautiful life cycle chart that I used to set as my wallpaper 🤣🤣. Good old days
+- (G) ASP.NET MVC: cultural shock migrating from WebForm to MVC, but got used to it once you figure out how controller and routing works.
+  - the messiest part is usually the over-complicated middleware setup
 - (F) ASP.NET RazorPage: cleaner version of WebForm. it's better, but I saw it less in my work experience, what a shame
 - VirtoCommerce, Odoo, Grafana
 
@@ -91,7 +94,7 @@ I use these tools to do cross service providers automation or some simple integr
 - (F) Playwright: amazing tool, has a built-in browser, tracer (debugger), and runs different browsers in parallel. just amazing.
 - (F) Selenium: make sure to set your webdriver correct!
 - (F) AutoIt: still remember my first impression. it's amazing how many things you can do via this tool.
-  - I once used this tool to enhance my live demo, hotkey to activate descriptive popup just like how you do animations in ppt
+  - I once used this tool to enhance my live demo, hotkey to activate descriptive popup just like how you do animations in PowerPoint
 - (F) AutoHotkey: AutoIt spin-off. I don't use it that much, I only know that it makes the syntax extraordinarily concise.
 - (F) NUnit: I know the value of unit tests. just don't have enough TDD experience in my career
 
@@ -99,18 +102,18 @@ I use these tools to do cross service providers automation or some simple integr
 
 - (G) ConsoleApp: my favorite interface for quick admin automation. however, I have a hunch that Powershell might do a better job.
 - (F) WinForm: most of my colleagues love to develop their automation stuff with WinForm. I guess it is just a matter of preference
-- Android, Unity
+<!-- Android, Unity -->
 
 ### Back-end & Application
 
 - (G) Entity Framework (+Core): I loved it when I first used it. I was the first adopter to use tons of LINQ in my workspace.
   - once you get used to LINQ, there's no reason to reject EF
-  - the only GOTCHA is how you ease the process whenever a performance bottleneck hit
+  - the only GOTCHA is how you refactor the code when a performance bottleneck hits
 - (G) HtmlAgilityPack: I learned about XPATH from this tool. It's fascinating how CSS Selector differs from XPATH
   - the true coding guru will know the cases when XPATH shines
-- (G) Dapper: it's the tool for developers who feel uncomfortable using too much LINQ in their codebase or developers who make performance the first priority
-- (G) ADO.NET: the good old friend. I once dived into all the dataset and adapter API. they sure make something robust except for weak types.
-- (G) ASP.NET Web API: use it like a breeze. however, one may still get into trouble if they wish to strongly type all the filtering criteria.
+- (G) Dapper: it's the tool for developers who feel uncomfortable using too much LINQ in their codebase or developers who make performance as their first priority
+- (G) ADO.NET: the good old friend. I once dived into all the dataset and adapter API. They surely made something robust except for the weak types.
+- (G) ASP.NET Web API: use it like a breeze. however, one may still get into trouble trying to strongly type all the filtering criteria.
   - also, it has similar problems like MVC where middleware might be messy
 - (G) Postman: first launch in 2012. every developer's go-to tool to test out various API endpoints.
   - I have experience using the scripting feature to compose integration tests
@@ -125,22 +128,23 @@ I use these tools to do cross service providers automation or some simple integr
   - here's how: developers should stick with their team coding convention.
   - solving problems with packages seems more acceptable than using delicate language features, then do it yourself
   - anyway, I don't use CSharp that much these days, but I am still strongly interested how it evolve
-- (G) JavaScript: another language that feeds me. I don't have many complaints that it is not a statically typed language
+- (G) JavaScript: another language that feeds me. I don't have many complaints about the fact that it is not a statically typed language
   - what I can recall is that it was fascinating to make things work in the browser, and everyone can open the devtools to debug
   - I have not yet reached the guru level though, 'this' and deeply proto-chain still confused me
-  - not to mention the significant semi-colon and parentheses omitted by the minifier, these always catch me off guard
+  - not to mention the rules about when you can omit semicolons and parentheses are so confusing, they always catch me off guard
 - (G) TypeScript: legendary language designed by the guy who also designed CSharp.
   - it is probably the very first time I know that a language could have so many utilities and operators to interact with a 'type'
-  - not to mention the legends said type system of typescript on its own is Turing Complete, just amazing!
-- (G) Regex: probably one of my best skills among group of developers. however, I haven't read the book "Mastering Regular Expressions"
-  - hope I will complete the book someday, before that, I will just identify myself a layman
+  - not to mention the legends said the "type system" of typescript on its own is Turing Complete, just amazing!
+- (G) Regex: probably one of my best skills among group of developers. however, I haven't read the book "Mastering Regular Expressions" yet
+  - hope I will complete the book someday, before that, I will just identify myself as a layman
 - (G) LINQ: the beautiful syntax that imbues SQL-like syntax into the CSharp world. whoever designed this must be a genius
-  - note that functional syntax is different from query syntax. query syntax is a subset of functional syntax
-  - query syntax shines in cases of simple join or continuation
+  - note that method syntax is different from query syntax. query syntax is a subset of method syntax
+  - query syntax shines in cases of simple join or query continuation
 - (F) Powershell: I don't use it enough in my job experience, because I was too fascinated with CSharp and console applications
   - hopefully, I will make my own cmdlet one day
 - (F) Python: the hot programming language. I admit the syntax is indeed graceful and resonates with my pursuit of minimalism
   - however, I don't want to use it that much. just call me a rebel
+<!-- Java -->
 
 ### DB
 
@@ -175,9 +179,8 @@ I don't do much fancy stuff in the DevOps area. Most of the time I just deploy, 
 
 ## **OOPS**
 
-I exceed my expected content length again 😓  
-I will leave "personal used" and "current favorite" part in next article.
-
+I exceed my expected content length again 😓
+I will leave "personal usage" and "current learning" part in next article.
 
 These are the tools I used in my previous work experience.  
 I can't tell if this is the correct format to record stuff  
@@ -185,4 +188,3 @@ But, it is a good starting point.
 
 Hope someone finds one or two interesting things here.  
 See you in the next one 💪💪
-
