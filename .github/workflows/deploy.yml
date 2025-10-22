@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+      - name: Fetch blog content
+        run: |
+          git clone --depth 1 https://${{ secrets.CONTENT_REPO_TOKEN }}@github.com/johntao/blog-posts.git scc
+          cp -r scc/* src/content/
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:
