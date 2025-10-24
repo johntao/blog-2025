@@ -10,7 +10,7 @@ const aiGeneratedPosts = await getCollection('ai-generated');
 const allPosts = [...defaultPosts, ...aiGeneratedPosts];
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .slice(0, 10);
 ---
 
 <BaseLayout title="JT's Weblog">

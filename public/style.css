@@ -31,12 +31,15 @@ body {
 }
 
 /* Headers */
-h1 {
-  color: var(--color-bg-black);
-  background-color: var(--color-yellow);
+h1,h2,h3,h4 {
   font-size: unset;
   font-family: monospace;
   font-weight: bold;
+}
+
+h1 {
+  color: var(--color-bg-black);
+  background-color: var(--color-yellow);
   margin-bottom: 0.5em;
   width: fit-content;
   margin-inline: auto;
@@ -44,21 +47,15 @@ h1 {
 }
 
 h2 {
-  font-size: unset;
-  font-weight: bold;
   margin-top: 1em;
 }
 
 h3 {
-  font-size: unset;
-  font-weight: bold;
   margin-left: 0.5em;
   margin-block: 1rem;
 }
 
 h4 {
-  font-size: 1em;
-  font-weight: bold;
   margin-top: 0.8em;
   margin-bottom: 0.4em;
   text-indent: 2em;
