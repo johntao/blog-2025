@@ -91,7 +91,6 @@ a:hover {
    Horizontal Spacing
    ================================ */
 
-/* Level 3 indent */
 ul, ol {
   margin-left: 1.3rem;  /* Base list indent */
 }
@@ -116,6 +115,13 @@ body {
   font-family: Verdana, system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+}
+
+/* Desktop - use monospace font */
+@media (min-width: 769px) {
+  body {
+    font-family: monospace;
+  }
 }
 
 /* Headers */
