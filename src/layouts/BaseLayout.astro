@@ -1,9 +1,10 @@
 ---
 interface Props {
   title: string;
+  cls: string;
 }
 
-const { title } = Astro.props;
+const { title, cls } = Astro.props;
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -26,12 +27,12 @@ const currentPath = Astro.url.pathname;
 <body>
   <header>
     <h1>JT's Weblog</h1>
-    <p>Thoughts, writings, and musings</p>
+    <!-- <p>Thoughts, writings, and musings</p> -->
   </header>
 
-  <hr>
+  <!-- <hr> -->
 
-  <main>
+  <main class={cls}>
     <slot />
   </main>
 

@@ -7,7 +7,7 @@ const posts = (await getCollection('ai-generated'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Posts Tag: AI-Generated">
+<BaseLayout title="Posts Tag: AI-Generated" cls="list1">
   <h2>Posts Tagged: AI-Generated</h2>
 
   {posts.map((post, index) => (

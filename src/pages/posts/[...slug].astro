@@ -33,7 +33,7 @@ const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
     <h2>{entry.data.title}</h2>
     <pre>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
 pub: {formattedDate}</pre>
-    <hr>
+    <!-- <hr> -->
 
     <Content />
   </article>

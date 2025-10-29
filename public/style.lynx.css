@@ -1,0 +1,230 @@
+:root {
+  /* Color palette */
+  --color-bg-black: #1a191b;
+  --color-bg-black-deep: #0a0a0a;
+  --color-text-white: #d8d4d6;
+  --color-yellow: #fac688;
+  --color-blue: #84b5c6;
+  --color-red: #c45456;
+  --color-green: #93a65b;
+  --color-purple: #f191e1;
+  --color-grey: #404040;
+}
+
+/* ================================
+   NORMALIZATION
+   Cancel browser defaults to achieve terminal-like design
+   ================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 16px;
+  max-width: 850px;
+  margin-inline: auto;
+}
+
+h1, h2, h3, h4 {
+  font-size: unset;  /* All headers same size */
+}
+
+em {
+  font-style: normal;  /* Remove italic, use color instead */
+}
+
+strong {
+  font-weight: normal;  /* Remove bold, use color instead */
+}
+
+a {
+  text-decoration: none;  /* Remove underline by default */
+}
+
+a:hover {
+  text-decoration: underline;  /* Add underline on hover */
+}
+
+blockquote {
+  font-style: italic;
+}
+
+/* ================================
+   SEMANTIC COLORS
+   Colors communicate meaning, not decoration
+   ================================ */
+
+/* --- Inverted & Dual-color Schemes ---
+   Elements that use both bg-color and fg-color together */
+
+body {
+  background-color: var(--color-bg-black);  /* Base terminal background */
+  color: var(--color-text-white);  /* Base terminal text */
+}
+
+
+pre {
+  background-color: var(--color-bg-black-deep);
+}
+
+code:not(pre code) {
+  background-color: var(--color-bg-black-deep);  /* Deep black background */
+  color: var(--color-yellow);  /* Yellow highlighted text */
+}
+
+/* --- Single-color Semantic Rules --- */
+
+/* Blue = Metadata & contextual information */
+em, blockquote {
+  color: var(--color-blue);  /* Dates, published info */
+}
+
+/* Red = Important labels & strong emphasis */
+strong {
+  color: var(--color-red);  /* Important labels */
+}
+
+/* Green = Links (default state) */
+a {
+  color: var(--color-green);  /* All links */
+}
+
+/* Yellow = Highlights & active states */
+a:hover {
+  color: var(--color-yellow);  /* Link hover */
+}
+
+/* Purple = Lists & enumerations */
+li {
+  color: var(--color-purple);  /* List items */
+}
+
+ul>li::marker {
+  color: var(--color-purple);  /* Unordered list markers */
+}
+
+ol>li::marker {
+  color: var(--color-purple);  /* Ordered list markers */
+}
+
+/* ================================
+   INDENTATION AS VISUAL HIERARCHY
+   Progressive horizontal spacing creates depth and structure
+   ================================ */
+
+code:not(pre code) {
+  padding-inline: 0.5em;
+}
+/* block elements */
+/* Level 1 indent */
+h2 {
+  margin-left: 0;
+}
+pre {
+  margin-inline: 0;
+  padding-inline: 1em;
+}
+/* Level 2 indent */
+h3, p, blockquote {
+  margin-left: 0.5em;
+}
+/* Level 3 indent */
+ul, ol {
+  margin-left: 1em;  /* Base list indent */
+}
+/* Level 4 indent */
+h4 {
+  text-indent: 1.5em;
+}
+/* Level 5 indent */
+ul ul, ul ol, ol ul, ol ol {
+  margin-left: 1em;  /* Nested list additional indent */
+}
+
+/* ================================
+   VERTICAL RHYTHM
+   Consistent vertical spacing between elements
+   ================================ */
+
+article>* {
+  margin-bottom: 1rem;
+}
+h2 {
+  margin-top: 1em;
+}
+h3 {
+  margin-block: 1rem;
+}
+h4 {
+  margin-top: 0.8em;
+  margin-bottom: 0.4em;
+}
+pre {
+  padding-block: 1em;
+  margin-block: 1em;
+}
+
+nav {
+  margin-top: 1em;
+}
+
+/* ================================
+   Typography
+   ================================ */
+
+body {
+  font-family: Verdana, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Headers */
+h1,h2,h3,h4 {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Code blocks */
+pre {
+  font-family: monospace;
+}
+
+/* Inline code */
+code:not(pre code) {
+  font-family: monospace;
+}
+
+/* ================================
+   Custom Rules or Components that seldom appear
+   ================================ */
+
+h1 {
+  width: fit-content;
+  background-color: var(--color-yellow);  /* Inverted: yellow background */
+  color: var(--color-bg-black);  /* Inverted: black text */
+  /* vertical */
+  margin-bottom: 0.5em;
+  /* horizontal */
+  margin-inline: auto;
+  padding-inline: 0.5em;
+}
+
+/* Horizontal rules */
+hr {
+  border: none;
+  border-top-style: dashed;
+  border-top-width: 1.8px;
+  border-top-color: var(--color-yellow);  /* Section dividers */
+  margin-block: 1rem; /* Vertical */
+  margin-inline: 2rem; /* Horizontal */
+}
+
+/* Code blocks */
+pre {
+  overflow-x: auto;
+  border: 1px solid var(--color-grey);
+}
+
