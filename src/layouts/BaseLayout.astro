@@ -26,7 +26,7 @@ const currentPath = Astro.url.pathname;
 </head>
 <body>
   <header>
-    <h1>JT's Weblog</h1>
+    <h1><a href="/" id="site-heading">JT's Weblog</a></h1>
     <!-- <p>Thoughts, writings, and musings</p> -->
   </header>
 
@@ -52,5 +52,26 @@ const currentPath = Astro.url.pathname;
       ))}
     </p>
   </nav>
+
+  <script>
+    const heading = document.getElementById('site-heading');
+    if (heading) {
+      heading.addEventListener('click', (e) => {
+        const isRootPage = window.location.pathname === '/';
+        if (isRootPage) return;
+        if (!document.referrer) return;
+
+        try {
+          const referrerUrl = new URL(document.referrer);
+          if (referrerUrl.origin !== window.location.origin) return;
+
+          e.preventDefault();
+          history.back();
+        } catch (err) {
+          // If URL parsing fails, let default behavior happen
+        }
+      });
+    }
+  </script>
 </body>
 </html>

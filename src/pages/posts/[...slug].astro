@@ -28,11 +28,11 @@ const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
 
 ---
 
-<BaseLayout title={entry.data.title}>
+<BaseLayout title={entry.data.title} cls="detail">
   <article>
     <h2>{entry.data.title}</h2>
-    <pre>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
-pub: {formattedDate}</pre>
+    <p><em>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
+pub: {formattedDate}</em></p>
     <!-- <hr> -->
 
     <Content />

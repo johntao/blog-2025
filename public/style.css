@@ -2,11 +2,11 @@
   /* Color palette */
   --color-border: #404040; /* black-sm 404040; */
   --color-body-bg: #1a191b; /* black-md 1a191b; */
-  --color-code-bg: #0a0a0a; /* black-lg 0a0a0a; */
+  --color-code-bg: #24292e; /* slate 24292e; black-lg 0a0a0a; */
   --color-text: #d8d4d6; /* white d8d4d6; */
   --color-separator: #fac688; /* yellow fac688; */
   --color-em: #b98eff; /* b98eff purple; darkblue 6091b7; */
-  --color-strong: #b98eff; /* purple b98eff; ff7de9 pink */
+  /*--color-strong: #b98eff;  purple b98eff; ff7de9 pink */
   --color-hyprlink: #75bfff; /* blue 75bfff; */
   --color-heading: #64d164; /* green-sm 64d164; green-lg 86De74 */
 }
@@ -65,8 +65,8 @@ pre {
   background-color: var(--color-code-bg);
 }
 code:not(pre code) {
-  background-color: var(--color-code-bg);  /* Deep black background */
-  color: var(--color-separator);  /* Yellow highlighted text */
+  background-color: var(--color-code-bg);
+  color: var(--color-em);
 }
 
 /* --- Single-color Semantic Rules --- */
@@ -74,10 +74,7 @@ code:not(pre code) {
 h2,h3,h4 {
   color: var(--color-heading);
 }
-strong {
-  color: var(--color-strong);  /* Important labels */
-}
-em {
+em, strong {
   color: var(--color-em);
 }
 a {
@@ -156,13 +153,18 @@ code:not(pre code) {
 
 h1 {
   width: fit-content;
-  background-color: var(--color-separator);  /* Inverted: yellow background */
-  color: var(--color-code-bg);  /* Inverted: black text */
+  background-color: var(--color-separator); /* Inverted: yellow background */
   /* vertical */
   margin-bottom: 0.5rem;
   /* horizontal */
   margin-inline: auto;
   padding-inline: 0.5rem;
+}
+h1>a {
+  color: var(--color-body-bg); /* Inverted: black text */
+  &:hover {
+    color: var(--color-body-bg);
+  }
 }
 
 /* Horizontal rules */
@@ -212,11 +214,22 @@ blockquote {
   list-style: none;
   margin-left: 0;
   font-family: monospace;
+  line-height: 1.6;
 }
 .list0>* {
   margin-bottom: 1rem;
+}
+.list0 li {
+  border-bottom: 2px solid var(--color-border);
+  border-bottom-style: dashed;
 }
 
 .about>h2:first-child {
   margin-block: 1.5rem;
 }
+
+.detail h2:first-child+p {
+  white-space: pre;
+  font-family: monospace;
+}
+
