@@ -14,7 +14,7 @@ const { data: viewData } = await supabase
 const viewCount = viewData?.count || 0
 ---
 
-<em data-slug={postSlug}>
+<em class="view-counter" data-slug={postSlug}>
 cnt: {viewCount} views</em>
 
 <script>
