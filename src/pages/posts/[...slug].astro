@@ -1,6 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ViewCounter from '../../components/ViewCounter.astro';
+import Reactions from '../../components/Reactions.astro';
+import CommentList from '../../components/CommentList.astro';
+import CommentForm from '../../components/CommentForm.astro';
 
 export async function getStaticPaths() {
   return [...await getCollection('default'), ...await getCollection('ai-generated')]
@@ -31,8 +35,11 @@ const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
 <BaseLayout title={entry.data.title} cls="detail">
   <article>
     <h2>{entry.data.title}</h2>
-    <p><em>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
-pub: {formattedDate}</em></p>
+    <p>
+      <em>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
+pub: {formattedDate}</em>
+      <ViewCounter slug={entry.slug} />
+    </p>
     <!-- <hr> -->
 
     <Content />
@@ -50,5 +57,11 @@ pub: {formattedDate}</em></p>
       <strong>You've reached the oldest post</strong>}
     </p>
   </nav>
+
+  <hr>
+
+  <Reactions slug={entry.slug} />
+  <CommentList slug={entry.slug} />
+  <CommentForm slug={entry.slug} />
 
 </BaseLayout>

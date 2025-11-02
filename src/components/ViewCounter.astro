@@ -1,0 +1,44 @@
+---
+import { supabase } from '../lib/supabase'
+
+const { slug } = Astro.props
+const postSlug = slug || Astro.url.pathname
+
+// Fetch current view count
+const { data: viewData } = await supabase
+  .from('view_counts')
+  .select('count')
+  .eq('post_slug', postSlug)
+  .single()
+
+const viewCount = viewData?.count || 0
+---
+
+<em data-slug={postSlug}>
+cnt: {viewCount} views</em>
+
+<script>
+  import { supabase } from '../lib/supabase'
+  
+  const counter = document.querySelector('.view-counter')
+  const slug = counter?.getAttribute('data-slug')
+  
+  if (slug) {
+    // Wait 2 seconds to avoid counting quick bounces
+    setTimeout(async () => {
+      try {
+        // Call Supabase function directly - no API route!
+        await supabase.rpc('increment_view_count', { slug })
+        
+        // Update display
+        const countEl = document.querySelector('.view-count')
+        if (countEl) {
+          const currentCount = parseInt(countEl.textContent || '0')
+          countEl.textContent = (currentCount + 1).toString()
+        }
+      } catch (error) {
+        console.error('Failed to increment view:', error)
+      }
+    }, 2000)
+  }
+</script>

@@ -251,7 +251,18 @@ blockquote {
 }
 
 .detail h2:first-child+p {
-  white-space: pre;
   font-family: monospace;
+  &>em {
+    white-space: pre;
+  }
+}
+
+.detail>div{
+  &:nth-last-of-type(-n+3) {
+    margin-top: 1rem;
+    &>h3::before {
+      content: unset;
+    }
+  }
 }
 

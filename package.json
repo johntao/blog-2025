@@ -10,7 +10,9 @@
     "disable": "astro preferences disable devToolbar"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.78.0",
     "astro": "^5.14.4",
+    "js-sha256": "^0.11.1",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0"
   }

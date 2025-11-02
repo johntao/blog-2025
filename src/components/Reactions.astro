@@ -1,0 +1,191 @@
+---
+import { supabase } from '../lib/supabase'
+
+const { slug } = Astro.props
+const postSlug = slug || Astro.url.pathname
+
+// Fetch reaction counts server-side (at build time)
+const { data: reactions } = await supabase
+  .from('reaction_counts')
+  .select('*')
+  .eq('post_slug', postSlug)
+
+const reactionMap = reactions?.reduce((acc, r) => {
+  acc[r.reaction_type] = r.count
+  return acc
+}, {} as Record<string, number>) || {}
+
+const reactionTypes = [
+  { type: 'like', emoji: '👍', label: 'Like' },
+  { type: 'love', emoji: '❤️', label: 'Love' },
+  { type: 'clap', emoji: '👏', label: 'Clap' },
+  { type: 'fire', emoji: '🔥', label: 'Fire' },
+  { type: 'thinking', emoji: '🤔', label: 'Thinking' }
+]
+---
+
+<div class="reactions" data-slug={postSlug}>
+  {reactionTypes.map(({ type, emoji, label }) => (
+    <button 
+      class="reaction-btn"
+      data-type={type}
+      title={label}
+    >
+      <span class="emoji">{emoji}</span>
+      <span class="count">{reactionMap[type] || 0}</span>
+    </button>
+  ))}
+</div>
+
+<script>
+  import { supabase } from '../lib/supabase'
+  import { sha256 } from 'js-sha256'
+  
+  const reactionsContainer = document.querySelector('.reactions')
+  const slug = reactionsContainer?.getAttribute('data-slug')
+  const buttons = document.querySelectorAll('.reaction-btn')
+  
+  // Generate user identifier (browser fingerprint)
+  function getUserIdentifier(): string {
+    const userAgent = navigator.userAgent
+    const language = navigator.language
+    const screenRes = `${screen.width}x${screen.height}`
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    
+    return sha256(userAgent + language + screenRes + timezone).substring(0, 16)
+  }
+  
+  const userIdentifier = getUserIdentifier()
+  
+  // Track user's reactions in localStorage
+  const storageKey = `reactions_${slug}`
+  const userReactions = new Set<string>(
+    JSON.parse(localStorage.getItem(storageKey) || '[]')
+  )
+  
+  // Mark already-reacted buttons
+  userReactions.forEach(type => {
+    const btn = document.querySelector(`[data-type="${type}"]`)
+    btn?.classList.add('active')
+  })
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const type = btn.getAttribute('data-type')
+      if (!type || !slug) return
+      
+      const isActive = btn.classList.contains('active')
+      const countEl = btn.querySelector('.count')
+      const currentCount = parseInt(countEl?.textContent || '0')
+      
+      try {
+        if (isActive) {
+          // Remove reaction - direct Supabase call
+          const { error } = await supabase
+            .from('reactions')
+            .delete()
+            .match({ 
+              post_slug: slug, 
+              reaction_type: type, 
+              user_identifier: userIdentifier 
+            })
+          
+          if (!error) {
+            // Update count
+            await supabase.rpc('update_reaction_count', {
+              slug,
+              r_type: type,
+              increment: -1
+            })
+            
+            btn.classList.remove('active')
+            if (countEl) countEl.textContent = Math.max(0, currentCount - 1).toString()
+            userReactions.delete(type)
+          }
+        } else {
+          // Add reaction - direct Supabase call
+          const { error } = await supabase
+            .from('reactions')
+            .insert({
+              post_slug: slug,
+              reaction_type: type,
+              user_identifier: userIdentifier
+            })
+          
+          if (!error) {
+            // Update count
+            await supabase.rpc('update_reaction_count', {
+              slug,
+              r_type: type,
+              increment: 1
+            })
+            
+            btn.classList.add('active')
+            if (countEl) countEl.textContent = (currentCount + 1).toString()
+            userReactions.add(type)
+          } else if (error.code === '23505') {
+            // Duplicate - user already reacted
+            btn.classList.add('active')
+            userReactions.add(type)
+          }
+        }
+        
+        // Save to localStorage
+        localStorage.setItem(storageKey, JSON.stringify([...userReactions]))
+        
+      } catch (error) {
+        console.error('Reaction error:', error)
+      }
+    })
+  })
+</script>
+
+<style>
+  .reactions {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+
+  .reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-border, #404040);
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    font-size: 0.85rem;
+    font-family: monospace;
+    color: var(--color-text, #d8d4d6);
+  }
+
+  .reaction-btn:hover {
+    border-color: var(--color-separator, #fac688);
+  }
+
+  .reaction-btn.active {
+    border-color: var(--color-heading, #64d164);
+    color: var(--color-heading, #64d164);
+  }
+
+  .emoji {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .reaction-btn.active .emoji {
+    opacity: 1;
+  }
+
+  .count {
+    font-weight: normal;
+    color: inherit;
+    min-width: 1.2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+</style>

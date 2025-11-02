@@ -1,0 +1,356 @@
+---
+const { slug } = Astro.props
+const postSlug = slug || Astro.url.pathname
+---
+
+<div class="comment-form-container">
+  <button class="toggle-form-btn" type="button">
+    <span class="toggle-text">Leave a Comment</span>
+    <span class="toggle-icon">+</span>
+  </button>
+  <form class="comment-form hidden" data-slug={postSlug}>
+    <!-- Honeypot field (hidden from users, but bots fill it) -->
+    <input 
+      type="text" 
+      name="website" 
+      id="website" 
+      class="honeypot"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+    
+    <div class="form-group">
+      <label for="author_name">*Name</label>
+      <input 
+        type="text" 
+        id="author_name" 
+        name="author_name" 
+        required
+        minlength="1"
+        maxlength="100"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="author_email">Email (optional, won't be published)</label>
+      <input 
+        type="email" 
+        id="author_email" 
+        name="author_email"
+        maxlength="100"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="content">*Comment</label>
+      <textarea 
+        id="content" 
+        name="content" 
+        required
+        minlength="1"
+        maxlength="5000"
+        rows="5"
+      ></textarea>
+      <div class="char-count">
+        <span class="current">0</span> / 5000 characters
+      </div>
+    </div>
+    
+    <input type="hidden" name="timestamp" id="timestamp" />
+    
+    <p class="form-note">
+      <button type="submit" class="submit-btn">
+        Submit Comment
+      </button>
+      <span>Your comment will be reviewed before publishing.</span>
+    </p>
+    
+    <div class="form-message"></div>
+  </form>
+</div>
+
+<script>
+  import { supabase } from '../lib/supabase'
+
+  const form = document.querySelector('.comment-form') as HTMLFormElement
+  const messageEl = document.querySelector('.form-message') as HTMLElement
+  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement
+  const contentArea = form?.querySelector('#content') as HTMLTextAreaElement
+  const charCount = form?.querySelector('.current') as HTMLElement
+  const timestampInput = form?.querySelector('#timestamp') as HTMLInputElement
+  const toggleBtn = document.querySelector('.toggle-form-btn') as HTMLButtonElement
+
+  // Toggle form visibility
+  toggleBtn?.addEventListener('click', () => {
+    form?.classList.toggle('hidden')
+    toggleBtn.classList.toggle('active')
+
+    // Set timestamp when form is shown
+    if (!form?.classList.contains('hidden') && timestampInput) {
+      timestampInput.value = Date.now().toString()
+    }
+  })
+
+  // Set timestamp when form loads (for non-toggle scenario)
+  if (timestampInput) {
+    timestampInput.value = Date.now().toString()
+  }
+  
+  // Character counter
+  contentArea?.addEventListener('input', () => {
+    if (charCount) {
+      charCount.textContent = contentArea.value.length.toString()
+    }
+  })
+  
+  // Client-side validation helper
+  function sanitizeText(text: string): string {
+    return text.trim().replace(/[<>]/g, '').substring(0, 5000)
+  }
+  
+  function isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    
+    // Disable submit button
+    submitBtn.disabled = true
+    submitBtn.textContent = 'Submitting...'
+    messageEl.textContent = ''
+    messageEl.className = 'form-message'
+    
+    const formData = new FormData(form)
+    const slug = form.getAttribute('data-slug')
+    
+    // 1. Honeypot check
+    const honeypot = formData.get('website') as string
+    if (honeypot && honeypot !== '') {
+      messageEl.textContent = '✗ Invalid submission detected'
+      messageEl.classList.add('error')
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit Comment'
+      return
+    }
+    
+    // 2. Timestamp check (must be at least 3 seconds old)
+    const timestamp = parseInt(formData.get('timestamp') as string)
+    const now = Date.now()
+    const elapsed = now - timestamp
+    if (elapsed < 3000) {
+      messageEl.textContent = '✗ Please take your time to write a thoughtful comment'
+      messageEl.classList.add('error')
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit Comment'
+      return
+    }
+    
+    // 3. Get and validate form data
+    const authorName = sanitizeText(formData.get('author_name') as string)
+    const authorEmail = formData.get('author_email') as string
+    const content = sanitizeText(formData.get('content') as string)
+    
+    if (!authorName || !content || !slug) {
+      messageEl.textContent = '✗ Please fill in all required fields'
+      messageEl.classList.add('error')
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit Comment'
+      return
+    }
+    
+    if (authorEmail && !isValidEmail(authorEmail)) {
+      messageEl.textContent = '✗ Please enter a valid email address'
+      messageEl.classList.add('error')
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit Comment'
+      return
+    }
+    
+    try {
+      // 4. Direct Supabase insert - RLS handles security!
+      const { error } = await supabase
+        .from('comments')
+        .insert({
+          post_slug: slug,
+          author_name: authorName,
+          author_email: authorEmail || null,
+          content: content,
+          approved: false // RLS policy enforces this anyway
+        })
+      
+      if (error) {
+        console.error('Supabase error:', error)
+        messageEl.textContent = `✗ Error: ${error.message}`
+        messageEl.classList.add('error')
+      } else {
+        messageEl.textContent = '✓ Comment submitted successfully! It will appear after review.'
+        messageEl.classList.add('success')
+        form.reset()
+        if (charCount) charCount.textContent = '0'
+        if (timestampInput) timestampInput.value = Date.now().toString()
+      }
+    } catch (error) {
+      console.error('Network error:', error)
+      messageEl.textContent = '✗ Network error. Please try again.'
+      messageEl.classList.add('error')
+    } finally {
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit Comment'
+    }
+  })
+</script>
+
+<style>
+  .comment-form-container {
+    max-width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  .toggle-form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border, #404040);
+    color: var(--color-heading, #64d164);
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .toggle-form-btn:hover {
+    border-color: var(--color-separator, #fac688);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .toggle-icon {
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+  }
+
+  .toggle-form-btn.active .toggle-icon {
+    transform: rotate(45deg);
+  }
+
+  .comment-form.hidden {
+    display: none;
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    color: var(--color-text, #d8d4d6);
+    font-family: monospace;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border, #404040);
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text, #d8d4d6);
+    font-family: monospace;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-separator, #fac688);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .char-count {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--color-text, #d8d4d6);
+    opacity: 0.5;
+    margin-top: 0.25rem;
+    font-family: monospace;
+  }
+
+  .submit-btn {
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    color: var(--color-text, #d8d4d6);
+    border: 1px solid var(--color-border, #404040);
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: normal;
+    font-family: monospace;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    border-color: var(--color-separator, #fac688);
+    color: var(--color-separator, #fac688);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .form-message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0;
+    font-weight: normal;
+    font-family: monospace;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+  }
+
+  .form-message.success {
+    background: rgba(100, 209, 100, 0.1);
+    color: var(--color-heading, #64d164);
+    border-color: var(--color-heading, #64d164);
+  }
+
+  .form-message.error {
+    background: rgba(255, 100, 100, 0.1);
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-text);
+    font-style: italic;
+    font-family: monospace;
+    display: flex;
+    justify-content: space-between;
+    &>span {
+      align-self: center;
+      opacity: 0.6;
+    }
+  }
+</style>
