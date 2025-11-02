@@ -9,7 +9,11 @@ const aiGeneratedPosts = await getCollection('ai-generated');
 // Combine all posts and get recent 3
 const allPosts = [...defaultPosts, ...aiGeneratedPosts];
 const recentPosts = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort((a, b) => {
+    const dateComparison = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+    if (dateComparison !== 0) return dateComparison;
+    return b.data.title.localeCompare(a.data.title);
+  })
   .slice(0, 10);
 ---
 
