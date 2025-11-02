@@ -15,7 +15,7 @@ const viewCount = viewData?.count || 0
 ---
 
 <em class="view-counter" data-slug={postSlug}>
-cnt: {viewCount} views</em>
+cnt: <span class="view-count">{viewCount}</span> views</em>
 
 <script>
   import { supabase } from '../lib/supabase'
