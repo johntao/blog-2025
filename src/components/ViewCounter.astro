@@ -14,28 +14,47 @@ const { data: viewData } = await supabase
 const viewCount = viewData?.count || 0
 ---
 
-<em class="view-counter" data-slug={postSlug}>
-cnt: <span class="view-count">{viewCount}</span> views</em>
+<em class="view-counter" data-slug={postSlug}>view-cnt: <span class="view-count">{viewCount}</span> views</em>
 
 <script>
   import { supabase } from '../lib/supabase'
-  
+
   const counter = document.querySelector('.view-counter')
   const slug = counter?.getAttribute('data-slug')
-  
+
   if (slug) {
-    // Wait 2 seconds to avoid counting quick bounces
+    // First, refetch the current view count at runtime
+    async function updateViewCount() {
+      try {
+        // Fetch current view count
+        const { data: viewData } = await supabase
+          .from('view_counts')
+          .select('count')
+          .eq('post_slug', slug)
+          .single()
+
+        const countEl = document.querySelector('.view-count')
+        if (countEl && viewData) {
+          countEl.textContent = viewData.count.toString()
+        }
+      } catch (error) {
+        console.error('Failed to fetch view count:', error)
+      }
+    }
+
+    // Update immediately on page load
+    updateViewCount()
+
+    // Wait 2 seconds to avoid counting quick bounces, then increment
     setTimeout(async () => {
       try {
-        // Call Supabase function directly - no API route!
-        await supabase.rpc('increment_view_count', { slug })
-        
-        // Update display
-        const countEl = document.querySelector('.view-count')
-        if (countEl) {
-          const currentCount = parseInt(countEl.textContent || '0')
-          countEl.textContent = (currentCount + 1).toString()
+        // Only increment view count in production builds
+        if (import.meta.env.PROD) {
+          await supabase.rpc('increment_view_count', { slug })
         }
+
+        // Refetch to get the updated count
+        await updateViewCount()
       } catch (error) {
         console.error('Failed to increment view:', error)
       }

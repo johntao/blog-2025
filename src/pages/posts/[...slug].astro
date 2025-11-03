@@ -30,17 +30,17 @@ const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
+
 ---
 
 <BaseLayout title={entry.data.title} cls="detail">
   <article>
     <h2>{entry.data.title}</h2>
-    <p>
-      <em>{entry.collection === 'ai-generated' ? 'AI-GENERATED\n' : ''}est: {remarkPluginFrontmatter.minutesRead}
-pub: {formattedDate}</em>
-      <ViewCounter slug={entry.slug} />
-    </p>
-    <!-- <hr> -->
+    <dl class="js-only">
+      {entry.collection === 'ai-generated' && (<em>AI-GENERATED</em>)}<noscript> |</noscript>
+      <em>estimate: {remarkPluginFrontmatter.minutesRead}</em><noscript> |</noscript>
+      <ViewCounter slug={entry.slug} /><noscript> | built-time: {import.meta.env.VITE_BUILD_TIME}</noscript>
+    </dl>
 
     <Content />
   </article>
@@ -65,3 +65,4 @@ pub: {formattedDate}</em>
   <CommentForm slug={entry.slug} />
 
 </BaseLayout>
+

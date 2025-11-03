@@ -250,10 +250,10 @@ blockquote {
   margin-block: 1.5rem;
 }
 
-.detail h2:first-child+p {
+.detail dl {
   font-family: monospace;
-  &>em {
-    white-space: pre;
+  & > em {
+    display: block;
   }
 }
 
