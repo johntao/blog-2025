@@ -80,21 +80,21 @@ const commentCount = comments?.length || 0
 
         // Update comments list
         if (commentCount === 0) {
-          commentsListContainer.querySelector('.comments-list')?.remove()
-          if (!commentsListContainer.querySelector('.no-comments')) {
+          commentsSection.querySelector('.comments-list')?.remove()
+          if (!commentsSection.querySelector('.no-comments')) {
             const noCommentsEl = document.createElement('p')
             noCommentsEl.className = 'no-comments'
             noCommentsEl.textContent = 'Be the first to comment!'
-            commentsListContainer.appendChild(noCommentsEl)
+            commentsSection.appendChild(noCommentsEl)
           }
         } else {
-          commentsListContainer.querySelector('.no-comments')?.remove()
+          commentsSection.querySelector('.no-comments')?.remove()
 
-          let listEl = commentsListContainer.querySelector('.comments-list')
+          let listEl = commentsSection.querySelector('.comments-list')
           if (!listEl) {
             listEl = document.createElement('div')
             listEl.className = 'comments-list'
-            commentsListContainer.appendChild(listEl)
+            commentsSection.appendChild(listEl)
           }
 
           // Clear and rebuild comments
