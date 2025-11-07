@@ -35,7 +35,7 @@ const postSlug = slug || Astro.url.pathname
     <div class="form-group">
       <label for="author_email">Email (optional, won't be published)</label>
       <input 
-        type="email" 
+        type="text" 
         id="author_email" 
         name="author_email"
         maxlength="100"
@@ -109,10 +109,6 @@ const postSlug = slug || Astro.url.pathname
     return text.trim().replace(/[<>]/g, '').substring(0, 5000)
   }
   
-  function isValidEmail(email: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
-  
   form?.addEventListener('submit', async (e) => {
     e.preventDefault()
     
@@ -154,14 +150,6 @@ const postSlug = slug || Astro.url.pathname
     
     if (!authorName || !content || !slug) {
       messageEl.textContent = '✗ Please fill in all required fields'
-      messageEl.classList.add('error')
-      submitBtn.disabled = false
-      submitBtn.textContent = 'Submit Comment'
-      return
-    }
-    
-    if (authorEmail && !isValidEmail(authorEmail)) {
-      messageEl.textContent = '✗ Please enter a valid email address'
       messageEl.classList.add('error')
       submitBtn.disabled = false
       submitBtn.textContent = 'Submit Comment'
