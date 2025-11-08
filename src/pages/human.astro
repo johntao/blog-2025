@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 // Fetch posts from ai-generated collection only
-const posts = (await getCollection('ai-generated'))
+const posts = (await getCollection('default'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Post Category: AI-Generated" cls="list1">
-  <h2>Category: AI-Generated</h2>
+<BaseLayout title="Post Category: Handmade" cls="list1">
+  <h2>Category: Handmade</h2>
 
   {posts.map((post, index) => (
     <>

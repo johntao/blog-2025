@@ -8,7 +8,11 @@ import CommentForm from '../../components/CommentForm.astro';
 
 export async function getStaticPaths() {
   return [...await getCollection('default'), ...await getCollection('ai-generated')]
-    .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .sort((a,b) => {
+      const dateComparison = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+      if (dateComparison !== 0) return dateComparison;
+      return b.data.title.localeCompare(a.data.title);
+    })
     .map((entry, i, arr) => {
       const nn = arr[i - 1];
       const pp = arr[i + 1];
@@ -38,6 +42,7 @@ const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
     <h2>{entry.data.title}</h2>
     <dl class="js-only">
       {entry.collection === 'ai-generated' && (<em>AI-GENERATED</em>)}<noscript> |</noscript>
+      <em>published: {formattedDate}</em><noscript> |</noscript>
       <em>estimate: {remarkPluginFrontmatter.minutesRead}</em><noscript> |</noscript>
       <ViewCounter slug={entry.slug} /><noscript> | built-time: {import.meta.env.VITE_BUILD_TIME}</noscript>
     </dl>
