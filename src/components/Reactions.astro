@@ -40,34 +40,68 @@ const reactionTypes = [
 <script>
   import { supabase } from '../lib/supabase'
   import { sha256 } from 'js-sha256'
-  
+
   const reactionsContainer = document.querySelector('.reactions')
   const slug = reactionsContainer?.getAttribute('data-slug')
   const buttons = document.querySelectorAll('.reaction-btn')
-  
+
   // Generate user identifier (browser fingerprint)
   function getUserIdentifier(): string {
     const userAgent = navigator.userAgent
     const language = navigator.language
     const screenRes = `${screen.width}x${screen.height}`
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    
+
     return sha256(userAgent + language + screenRes + timezone).substring(0, 16)
   }
-  
+
   const userIdentifier = getUserIdentifier()
-  
+
   // Track user's reactions in localStorage
   const storageKey = `reactions_${slug}`
   const userReactions = new Set<string>(
     JSON.parse(localStorage.getItem(storageKey) || '[]')
   )
-  
+
   // Mark already-reacted buttons
   userReactions.forEach(type => {
     const btn = document.querySelector(`[data-type="${type}"]`)
     btn?.classList.add('active')
   })
+
+  // Refetch reaction counts at runtime to ensure fresh data
+  if (slug) {
+    async function updateReactionCounts() {
+      try {
+        // Fetch current reaction counts from Supabase
+        const { data: reactions } = await supabase
+          .from('reaction_counts')
+          .select('*')
+          .eq('post_slug', slug)
+
+        const reactionMap = reactions?.reduce((acc, r) => {
+          acc[r.reaction_type] = r.count
+          return acc
+        }, {} as Record<string, number>) || {}
+
+        // Update count displays
+        buttons.forEach(btn => {
+          const type = btn.getAttribute('data-type')
+          if (type) {
+            const countEl = btn.querySelector('.count')
+            if (countEl) {
+              countEl.textContent = (reactionMap[type] || 0).toString()
+            }
+          }
+        })
+      } catch (error) {
+        console.error('Failed to fetch reaction counts:', error)
+      }
+    }
+
+    // Update counts on page load
+    updateReactionCounts()
+  }
   
   buttons.forEach(btn => {
     btn.addEventListener('click', async () => {
