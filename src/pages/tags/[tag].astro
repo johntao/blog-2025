@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  // Fetch posts from both collections
+  const defaultPosts = await getCollection('default');
+  const aiGeneratedPosts = await getCollection('ai-generated');
+  const allPosts = [...defaultPosts, ...aiGeneratedPosts];
+
+  // Get all unique tags
+  const allTags = new Set<string>();
+  allPosts.forEach(post => {
+    post.data.tags.forEach(tag => allTags.add(tag));
+  });
+
+  // Generate paths for each tag
+  return Array.from(allTags).map(tag => ({
+    params: { tag },
+    props: {
+      posts: allPosts
+        .filter(post => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    }
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag}`} cls="list1">
+  <h2>Tag: {tag}</h2>
+  <p style="opacity: 0.7; margin-bottom: 2rem;">
+    <a href="/tags">← Back to all tags</a>
+  </p>
+
+  {posts.map((post, index) => (
+    <>
+      <article>
+        <h3><a href={`/posts/${post.slug}`}>{post.data.title}</a></h3>
+        <p><em>Published: {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</em></p>
+        <p>{post.data.description}</p>
+        {post.data.tags.length > 1 && (
+          <p class="tags">
+            {post.data.tags.map((t) => (
+              <a href={`/tags/${t}`} class="tag" class:list={{ active: t === tag }}>#{t}</a>
+            ))}
+          </p>
+        )}
+      </article>
+
+      {index < posts.length - 1 && <hr />}
+    </>
+  ))}
+</BaseLayout>
+
+<style>
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .tag.active {
+    opacity: 1;
+    font-weight: bold;
+    color: var(--color-hyprlink, #75bfff);
+  }
+</style>

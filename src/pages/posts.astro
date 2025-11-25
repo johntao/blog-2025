@@ -18,6 +18,10 @@ const posts = allPosts.sort((a, b) => {
 <BaseLayout title="All Posts" cls="list0">
   <h2>All Posts</h2>
 
+  <p class="category-links">
+    <a href="/human">Human</a> | <a href="/ai-gen">AI-Gen</a>
+  </p>
+
   <h3>2025</h3>
   <ul>
     {posts.map(post => (

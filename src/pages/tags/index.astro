@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch posts from both collections
+const defaultPosts = await getCollection('default');
+const aiGeneratedPosts = await getCollection('ai-generated');
+const allPosts = [...defaultPosts, ...aiGeneratedPosts];
+
+// Count tags
+const tagCounts = new Map<string, number>();
+allPosts.forEach(post => {
+  post.data.tags.forEach(tag => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+// Group tags by prefix
+const groupedTags = new Map<string, Array<{ tag: string; count: number }>>();
+tagCounts.forEach((count, tag) => {
+  const colonIndex = tag.indexOf(':');
+  const prefix = colonIndex !== -1 ? tag.substring(0, colonIndex) : 'other';
+  const tagData = { tag, count };
+
+  if (!groupedTags.has(prefix)) {
+    groupedTags.set(prefix, []);
+  }
+  groupedTags.get(prefix)!.push(tagData);
+});
+
+// Sort groups and tags within groups
+const sortedGroups = Array.from(groupedTags.entries())
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([prefix, tags]) => ({
+    prefix,
+    tags: tags.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+  }));
+---
+
+<BaseLayout title="Tags" cls="list1">
+  <h2>Tags</h2>
+  <p style="opacity: 0.7; margin-bottom: 2rem;">Browse posts by tags</p>
+
+  {sortedGroups.map(group => (
+    <div class="tag-group">
+      <h3 class="tag-prefix">{group.prefix}</h3>
+      <ul class="tag-list">
+        {group.tags.map(({ tag, count }) => (
+          <li>
+            <a href={`/tags/${tag}`} class="tag-link">
+              {tag}
+              <span class="tag-count">({count})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</BaseLayout>
+
+<style>
+  .tag-group {
+    margin-bottom: 2rem;
+  }
+
+  .tag-prefix {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-hyprlink, #75bfff);
+  }
+
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .tag-list li {
+    margin: 0;
+  }
+
+  .tag-link {
+    display: inline-block;
+  }
+
+  .tag-count {
+    opacity: 0.6;
+    font-size: 0.9rem;
+  }
+</style>

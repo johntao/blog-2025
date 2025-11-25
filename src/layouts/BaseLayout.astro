@@ -8,9 +8,9 @@ const { title, cls } = Astro.props;
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Human', href: '/human' },
-  { label: 'AI-Gen', href: '/ai-gen' },
   { label: 'Posts', href: '/posts' },
+  { label: 'Mood', href: '/mood-tracker' },
+  { label: 'Tags', href: '/tags' },
   { label: 'About', href: '/about' }
 ];
 
@@ -27,7 +27,10 @@ const currentPath = Astro.url.pathname;
 </head>
 <body>
   <header>
-    <h1><a href="/" id="site-heading">JT's Weblog</a></h1>
+    <h1>
+      <button class="back-btn" id="back-btn" aria-label="Go back">←</button>
+      <a href="/">JT's Weblog</a>
+    </h1>
     <!-- <p>Thoughts, writings, and musings</p> -->
   </header>
 
@@ -55,23 +58,28 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <script>
-    const heading = document.getElementById('site-heading');
-    if (heading) {
-      heading.addEventListener('click', (e) => {
-        const isRootPage = window.location.pathname === '/';
-        if (isRootPage) return;
-        if (!document.referrer) return;
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+      const isRootPage = window.location.pathname === '/';
+      const hasReferrer = document.referrer;
 
+      if (!isRootPage && hasReferrer) {
         try {
           const referrerUrl = new URL(document.referrer);
-          if (referrerUrl.origin !== window.location.origin) return;
+          const isSameOrigin = referrerUrl.origin === window.location.origin;
+          const isNotRoot = referrerUrl.pathname !== '/';
 
-          e.preventDefault();
-          history.back();
+          if (isSameOrigin && isNotRoot) {
+            backBtn.style.display = 'inline-block';
+            backBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              history.back();
+            });
+          }
         } catch (err) {
-          // If URL parsing fails, let default behavior happen
+          // If URL parsing fails, keep button hidden
         }
-      });
+      }
     }
   </script>
 </body>
