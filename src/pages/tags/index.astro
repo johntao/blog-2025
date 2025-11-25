@@ -28,50 +28,64 @@ tagCounts.forEach((count, tag) => {
   groupedTags.get(prefix)!.push(tagData);
 });
 
-// Sort groups and tags within groups
+// Sort groups and tags within groups, calculate totals
 const sortedGroups = Array.from(groupedTags.entries())
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([prefix, tags]) => ({
-    prefix,
-    tags: tags.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
-  }));
+  .map(([prefix, tags]) => {
+    const sortedTags = tags.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+    const totalCount = sortedTags.reduce((sum, tag) => sum + tag.count, 0);
+    return {
+      prefix,
+      tags: sortedTags,
+      totalCount
+    };
+  })
+  .sort((a, b) => b.totalCount - a.totalCount || a.prefix.localeCompare(b.prefix));
 ---
 
 <BaseLayout title="Tags" cls="list1">
   <h2>Tags</h2>
   <p style="opacity: 0.7; margin-bottom: 2rem;">Browse posts by tags</p>
 
-  {sortedGroups.map(group => (
-    <div class="tag-group">
-      <h3 class="tag-prefix">{group.prefix}</h3>
-      <ul class="tag-list">
-        {group.tags.map(({ tag, count }) => (
-          <li>
-            <a href={`/tags/${tag}`} class="tag-link">
-              {tag}
-              <span class="tag-count">({count})</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ))}
+  <div class="tags-grid">
+    {sortedGroups.map(group => (
+      <>
+        <h3 class="tag-prefix">{group.prefix}({group.totalCount})</h3>
+        <ul class="tag-list">
+          {group.tags.map(({ tag, count }) => {
+            const tagName = tag.substring(tag.indexOf(':') + 1);
+            return (
+              <li>
+                <a href={`/tags/${tag}`} class="tag-link">
+                  {tagName}({count})
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </>
+    ))}
+  </div>
 </BaseLayout>
 
 <style>
-  .tag-group {
-    margin-bottom: 2rem;
+  .tags-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 2rem;
+    align-items: start;
   }
 
   .tag-prefix {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    margin: 0;
     color: var(--color-hyprlink, #75bfff);
+    white-space: nowrap;
   }
 
   .tag-list {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -85,8 +99,19 @@ const sortedGroups = Array.from(groupedTags.entries())
     display: inline-block;
   }
 
-  .tag-count {
-    opacity: 0.6;
-    font-size: 0.9rem;
+  /* Mobile: stack vertically */
+  @media (max-width: 768px) {
+    .tags-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .tag-prefix {
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-list {
+      margin-bottom: 1.5rem;
+    }
   }
 </style>
