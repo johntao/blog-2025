@@ -16,22 +16,29 @@ export const getStaticPaths = (async () => {
   });
 
   // Generate paths for each tag
-  return Array.from(allTags).map(tag => ({
-    params: { tag },
-    props: {
-      posts: allPosts
-        .filter(post => post.data.tags.includes(tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    }
-  }));
+  return Array.from(allTags).map(tag => {
+    // Replace empty string with placeholder for URL routing
+    const urlTag = tag === '' ? 'notag' : tag;
+    return {
+      params: { tag: urlTag },
+      props: {
+        posts: allPosts
+          .filter(post => post.data.tags.includes(tag))
+          .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+      }
+    };
+  });
 }) satisfies GetStaticPaths;
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+
+// Display name (tag from URL is already user-friendly)
+const displayTag = tag;
 ---
 
-<BaseLayout title={`Tag: ${tag}`} cls="list1">
-  <h2>Tag: {tag}</h2>
+<BaseLayout title={`Tag: ${displayTag}`} cls="list1">
+  <h2>Tag: {displayTag}</h2>
 
   {posts.map((post, index) => (
     <>

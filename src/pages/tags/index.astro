@@ -15,12 +15,32 @@ allPosts.forEach(post => {
   });
 });
 
+const Unnamed = '_root';
+
 // Group tags by prefix
-const groupedTags = new Map<string, Array<{ tag: string; count: number }>>();
+const groupedTags = new Map<string, Array<{ tag: string; count: number; suffix: string }>>();
 tagCounts.forEach((count, tag) => {
-  const colonIndex = tag.indexOf(':');
-  const prefix = colonIndex !== -1 ? tag.substring(0, colonIndex) : 'other';
-  const tagData = { tag, count };
+  let prefix: string;
+  let suffix: string;
+
+  if (tag === '') {
+    // Empty string tags (untagged posts)
+    prefix = 'notag';
+    suffix = Unnamed;
+  } else {
+    const colonIndex = tag.indexOf(':');
+    if (colonIndex !== -1) {
+      // Tag has colon: "prefix:suffix"
+      prefix = tag.substring(0, colonIndex);
+      suffix = tag.substring(colonIndex + 1);
+    } else {
+      // Tag without colon: use tag as prefix, "_root" as suffix
+      prefix = tag;
+      suffix = Unnamed;
+    }
+  }
+
+  const tagData = { tag, count, suffix };
 
   if (!groupedTags.has(prefix)) {
     groupedTags.set(prefix, []);
@@ -31,7 +51,12 @@ tagCounts.forEach((count, tag) => {
 // Sort groups and tags within groups, calculate totals
 const sortedGroups = Array.from(groupedTags.entries())
   .map(([prefix, tags]) => {
-    const sortedTags = tags.sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+    // Sort: "root" first, then by count descending, then alphabetically
+    const sortedTags = tags.sort((a, b) => {
+      if (a.suffix === Unnamed && b.suffix !== Unnamed) return -1;
+      if (a.suffix !== Unnamed && b.suffix === Unnamed) return 1;
+      return b.count - a.count || a.tag.localeCompare(b.tag);
+    });
     const totalCount = sortedTags.reduce((sum, tag) => sum + tag.count, 0);
     return {
       prefix,
@@ -44,19 +69,20 @@ const sortedGroups = Array.from(groupedTags.entries())
 
 <BaseLayout title="Tags" cls="list1">
   <h2>Tags</h2>
-  <p style="opacity: 0.7; margin-bottom: 2rem;">Browse posts by tags</p>
+  <p style="opacity: 0.7; margin-bottom: 1.5rem;">Browse posts by tags</p>
 
   <div class="tags-grid">
     {sortedGroups.map(group => (
       <>
         <h3 class="tag-prefix">{group.prefix}({group.totalCount})</h3>
         <ul class="tag-list">
-          {group.tags.map(({ tag, count }) => {
-            const tagName = tag.substring(tag.indexOf(':') + 1);
+          {group.tags.map(({ tag, count, suffix }) => {
+            // Use 'notag' as URL for empty string tags
+            const urlTag = tag === '' ? 'notag' : tag;
             return (
               <li>
-                <a href={`/tags/${tag}`} class="tag-link">
-                  {tagName}({count})
+                <a href={`/tags/${urlTag}`} class="tag-link">
+                  {suffix}({count})
                 </a>
               </li>
             );

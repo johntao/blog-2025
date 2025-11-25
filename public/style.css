@@ -193,7 +193,6 @@ code:not(pre code) {
 h1 {
   min-width: 180px; /* Fixed width to prevent shifting when button appears */
   background-color: var(--color-yellow); /* Inverted: yellow background */
-  margin-bottom: 0.5rem;
   position: relative;
 }
 h1>span {
