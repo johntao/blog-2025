@@ -2,6 +2,7 @@
 .docs/
 .logs/
 .claude/
+.mcp.json
 
 # build output
 dist/
