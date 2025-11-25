@@ -1,0 +1,30 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Posts', href: '/posts' },
+  //{ label: 'Mood', href: '/mood' },
+  { label: 'Tags', href: '/tags' },
+  { label: 'About', href: '/about' }
+];
+---
+
+<nav class="top-nav">
+  <p>
+    {navItems.map((item, index) => (
+      <>
+        {item.href === currentPath ? (
+          <strong>{item.label}</strong>
+        ) : (
+          <a href={item.href}>{item.label}</a>
+        )}
+        {index < navItems.length - 1 && ' | '}
+      </>
+    ))}
+  </p>
+</nav>
