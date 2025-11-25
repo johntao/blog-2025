@@ -6,7 +6,7 @@
   --color-text: #bebebe;      /* grey-100,google; */
   --color-separator: #38383d; /* slate-400,firefox; */
   --color-em: #f7f7f7;        /* white-500,namchee; */
-  --color-hyprlink: #74b2f3;  /* blue-200,chirpy; */
+  --color-hyprlink: #75bfff;  /* blue-300,firefox; */
   --color-heading: #64d164;   /* green-200,me; */
   --color-yellow: #feca88;    /* yellow,lynx; */
   --color-purple: #b98eff;    /* ,firefox; */
@@ -115,9 +115,19 @@ td, th {
   }
 }
 
+nav.top-nav > p {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
 /* ================================
    VERTICAL Spacing
    ================================ */
+
+body>* {
+  margin-bottom: 0.5rem;
+}
 
 article>* {
   margin-bottom: 1.3rem;
@@ -174,45 +184,53 @@ code:not(pre code) {
    Custom Rules (Adhoc) or Components that seldom appear
    ================================ */
 
-h1 {
+/* Header container for fixed-width layout */
+.header-container {
   width: fit-content;
-  background-color: var(--color-yellow); /* Inverted: yellow background */
-  /* vertical */
-  margin-bottom: 0.5rem;
-  /* horizontal */
   margin-inline: auto;
-  padding-inline: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
-h1>a {
+
+h1 {
+  min-width: 180px; /* Fixed width to prevent shifting when button appears */
+  background-color: var(--color-yellow); /* Inverted: yellow background */
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+h1>span {
   color: var(--color-body-bg); /* Inverted: black text */
+  display: block;
+  margin-inline: auto;
+  width: fit-content;
+}
+
+/* Dynamically created back button (JS only) */
+.js-back-btn {
+  /* normalize */
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
+
+	padding-inline: 9px;
+	position: absolute;
   &:hover {
-    color: var(--color-body-bg);
+    text-decoration: underline;
   }
 }
 
-/* Back button */
-.back-btn {
-  display: none; /* Hidden by default, shown via JS */
-  background: none;
-  border: none;
-  color: var(--color-body-bg);
-  font-size: 1rem;
-  font-family: monospace;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-}
-.back-btn:hover {
-  opacity: 0.7;
+.skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	font-weight: bold;
 }
 
-/* Hide back button in noscript/terminal browsers */
-noscript .back-btn {
-  display: none !important;
+.skip-link:focus {
+  top: 16px;
+  right: auto;
+  left: 16px;
 }
 
 /* Horizontal rules */
@@ -249,7 +267,7 @@ blockquote {
    ================================ */
 
 .list1>h2:first-child {
-  margin-block: 1.5rem;
+  margin-bottom: 1rem;
 }
 .list1 h3::before {
   content: '';
@@ -275,7 +293,7 @@ blockquote {
 }
 
 .about>h2:first-child {
-  margin-block: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .detail dl {

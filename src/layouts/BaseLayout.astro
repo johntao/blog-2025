@@ -26,23 +26,41 @@ const currentPath = Astro.url.pathname;
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header>
-    <h1>
-      <button class="back-btn" id="back-btn" aria-label="Go back">←</button>
-      <a href="/">JT's Weblog</a>
-    </h1>
+    <div class="header-container">
+      <h1 id="site-header">
+        <span>JT's Weblog</span>
+      </h1>
+    </div>
     <!-- <p>Thoughts, writings, and musings</p> -->
   </header>
 
   <!-- <hr> -->
 
-  <main class={cls}>
+  <nav class="top-nav">
+    <p>
+      {navItems.map((item, index) => (
+        <>
+          {item.href === currentPath ? (
+            <strong>{item.label}</strong>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+          {index < navItems.length - 1 && ' | '}
+        </>
+      ))}
+    </p>
+  </nav>
+
+  <main id="main-content" class={cls}>
     <slot />
   </main>
 
   <hr>
 
-  <nav>
+  <nav class="top-nav">
     <p>
       {navItems.map((item, index) => (
         <>
@@ -58,26 +76,32 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <script>
-    const backBtn = document.getElementById('back-btn');
-    if (backBtn) {
-      const isRootPage = window.location.pathname === '/';
+    // Dynamically create back button (won't appear in terminal browsers)
+    const header = document.getElementById('site-header');
+    if (header) {
       const hasReferrer = document.referrer;
-
-      if (!isRootPage && hasReferrer) {
+      if (hasReferrer) {
         try {
           const referrerUrl = new URL(document.referrer);
           const isSameOrigin = referrerUrl.origin === window.location.origin;
-          const isNotRoot = referrerUrl.pathname !== '/';
 
-          if (isSameOrigin && isNotRoot) {
-            backBtn.style.display = 'inline-block';
+          if (isSameOrigin) {
+            // Create back button with double arrows for wider click area
+            const backBtn = document.createElement('button');
+            backBtn.className = 'js-back-btn';
+            backBtn.setAttribute('aria-label', 'Go back');
+            backBtn.textContent = '←←';
+
             backBtn.addEventListener('click', (e) => {
               e.preventDefault();
               history.back();
             });
+
+            // Insert before the logo link
+            header.insertBefore(backBtn, header.firstChild);
           }
         } catch (err) {
-          // If URL parsing fails, keep button hidden
+          // If URL parsing fails, don't create button
         }
       }
     }
