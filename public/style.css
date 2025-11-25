@@ -1,14 +1,15 @@
 :root {
   /* Color palette */
-  --color-border: #404040; /* black-sm 404040; */
-  --color-body-bg: #1a191b; /* black-md 1a191b; */
-  --color-code-bg: #24292e; /* slate 24292e; black-lg 0a0a0a; */
-  --color-text: #d8d4d6; /* white d8d4d6; */
-  --color-separator: #fac688; /* yellow fac688; */
-  --color-em: #b98eff; /* b98eff purple; darkblue 6091b7; */
-  /*--color-strong: #b98eff;  purple b98eff; ff7de9 pink */
-  --color-hyprlink: #75bfff; /* blue 75bfff; */
-  --color-heading: #64d164; /* green-sm 64d164; green-lg 86De74 */
+  --color-border: #38383d;    /* slate-400,firefox; */
+  --color-body-bg: #1f1f1f;   /* black-200,vscode; */
+  --color-code-bg: #24292e;   /* slate-100,github; */
+  --color-text: #bebebe;      /* grey-100,google; */
+  --color-separator: #38383d; /* slate-400,firefox; */
+  --color-em: #f7f7f7;        /* white-500,namchee; */
+  --color-hyprlink: #74b2f3;  /* blue-200,chirpy; */
+  --color-heading: #64d164;   /* green-200,me; */
+  --color-yellow: #feca88;    /* yellow,lynx; */
+  --color-purple: #b98eff;    /* ,firefox; */
 }
 
 /* ================================
@@ -72,7 +73,7 @@ pre {
 }
 code:not(pre code) {
   background-color: var(--color-code-bg);
-  color: var(--color-em);
+  color: var(--color-purple);
 }
 
 /* --- Single-color Semantic Rules --- */
@@ -87,7 +88,7 @@ a {
   color: var(--color-hyprlink);  /* All links */
 }
 a:hover {
-  color: var(--color-separator);  /* Link hover */
+  color: var(--color-yellow);  /* Link hover */
 }
 td, th {
   border-color: var(--color-border);
@@ -175,7 +176,7 @@ code:not(pre code) {
 
 h1 {
   width: fit-content;
-  background-color: var(--color-separator); /* Inverted: yellow background */
+  background-color: var(--color-yellow); /* Inverted: yellow background */
   /* vertical */
   margin-bottom: 0.5rem;
   /* horizontal */
@@ -192,7 +193,7 @@ h1>a {
 /* Horizontal rules */
 hr {
   border: none;
-  border-top-style: dashed;
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: var(--color-separator);  /* Section dividers */
   margin-block: 1rem; /* Vertical */
@@ -243,7 +244,9 @@ blockquote {
 }
 .list0 li {
   border-bottom: 2px solid var(--color-border);
-  border-bottom-style: dashed;
+}
+.list0 li:last-child {
+  border-bottom: none;
 }
 
 .about>h2:first-child {
