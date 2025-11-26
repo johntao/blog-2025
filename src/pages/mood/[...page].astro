@@ -18,20 +18,21 @@ const { page } = Astro.props;
   <p>Short reviews on random topics: games, podcasts, movies, events...</p>
   <hr />
 
-  {page.data.map((mood, index) => (
-    <>
-      <article>
-        <h3>
-          <!-- <strong></strong> -->
-          {mood.data.pubDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
-          {mood.data.title}
-        </h3>
-        <pre class="mood-content" set:html={mood.body} />
-      </article>
-
-      {index < page.data.length - 1 && <hr />}
-    </>
-  ))}
+  {page.data.map(async (mood, index) => {
+    const { Content } = await mood.render();
+    return (
+      <>
+        <article>
+          <h3>
+            {mood.data.pubDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
+            {mood.data.title}
+          </h3>
+          <Content />
+        </article>
+        {index < page.data.length - 1 && <hr />}
+      </>
+    );
+  })}
 
   {(page.url.prev || page.url.next) && (
     <nav class="pagination">
@@ -43,10 +44,51 @@ const { page } = Astro.props;
 </BaseLayout>
 
 <style>
-  .mood-content {
-    text-wrap: stable;
-    color: var(--color-white-l4);
-  }
+  /* .mood-content :global(p) { */
+  /*   margin: 0.5rem 0; */
+  /* } */
+  /**/
+  /* .mood-content :global(a) { */
+  /*   color: var(--color-hyprlink, #75bfff); */
+  /*   text-decoration: underline; */
+  /* } */
+  /**/
+  /* .mood-content :global(a:hover) { */
+  /*   opacity: 0.8; */
+  /* } */
+  /**/
+  /* .mood-content :global(ul), */
+  /* .mood-content :global(ol) { */
+  /*   margin: 0.5rem 0; */
+  /*   padding-left: 1.5rem; */
+  /* } */
+  /**/
+  /* .mood-content :global(strong) { */
+  /*   font-weight: bold; */
+  /* } */
+  /**/
+  /* .mood-content :global(em) { */
+  /*   font-style: italic; */
+  /* } */
+  /**/
+  /* .mood-content :global(code) { */
+  /*   background-color: var(--color-bg-code, rgba(255, 255, 255, 0.1)); */
+  /*   padding: 0.1rem 0.3rem; */
+  /*   border-radius: 3px; */
+  /*   font-family: monospace; */
+  /* } */
+  /**/
+  /* .mood-content :global(pre) { */
+  /*   background-color: var(--color-bg-code, rgba(255, 255, 255, 0.1)); */
+  /*   padding: 1rem; */
+  /*   border-radius: 5px; */
+  /*   overflow-x: auto; */
+  /* } */
+  /**/
+  /* .mood-content :global(pre code) { */
+  /*   background-color: transparent; */
+  /*   padding: 0; */
+  /* } */
 
   .pagination {
     display: flex;

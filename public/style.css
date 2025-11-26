@@ -79,7 +79,7 @@ h2,h3,h4 {
   color: var(--color-green-d4);
 }
 em, strong {
-  color: var(--color-white-l4);
+  color: var(--color-yellow-l1);
 }
 a {
   color: var(--color-sky-l4);  /* All links */
