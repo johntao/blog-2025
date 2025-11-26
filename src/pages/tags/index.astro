@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { getDisplayPrefix } from '../../config/tagMappings';
 
 // Fetch posts from both collections
 const defaultPosts = await getCollection('default');
@@ -75,7 +76,7 @@ const sortedGroups = Array.from(groupedTags.entries())
   <div class="tags-grid">
     {sortedGroups.map(group => (
       <>
-        <h3 class="tag-prefix">{group.prefix}({group.totalCount})</h3>
+        <h3 class="tag-prefix">{getDisplayPrefix(group.prefix)}({group.totalCount})</h3>
         <ul class="tag-list">
           {group.tags.map(({ tag, count, suffix }) => {
             // Use 'notag' as URL for empty string tags
