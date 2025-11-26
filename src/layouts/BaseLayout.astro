@@ -1,12 +1,19 @@
 ---
-import Navigation from '../components/Navigation.astro';
-
 interface Props {
   title: string;
   cls: string;
 }
 
 const { title, cls } = Astro.props;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Posts', href: '/posts' },
+  //{ label: 'Mood', href: '/mood' },
+  { label: 'Tags', href: '/tags' },
+  { label: 'About', href: '/about' }
+];
+
 const currentPath = Astro.url.pathname;
 ---
 
@@ -16,6 +23,7 @@ const currentPath = Astro.url.pathname;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} - JT's Weblog</title>
+  <link rel="icon" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -32,7 +40,20 @@ const currentPath = Astro.url.pathname;
 
   <!-- <hr> -->
 
-  <Navigation currentPath={currentPath} />
+  <nav class="top-nav">
+    <p>
+      {navItems.map((item, index) => (
+        <>
+          {item.href === currentPath ? (
+            <strong>{item.label}</strong>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+          {index < navItems.length - 1 && ' | '}
+        </>
+      ))}
+    </p>
+  </nav>
 
   <main id="main-content" class={cls}>
     <slot />
@@ -40,38 +61,40 @@ const currentPath = Astro.url.pathname;
 
   <hr>
 
-  <Navigation currentPath={currentPath} />
+  <nav class="top-nav">
+    <p>
+      {navItems.map((item, index) => (
+        <>
+          {item.href === currentPath ? (
+            <strong>{item.label}</strong>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+          {index < navItems.length - 1 && ' | '}
+        </>
+      ))}
+    </p>
+  </nav>
 
   <script>
-    // Dynamically create back button (won't appear in terminal browsers)
-    const header = document.getElementById('site-header');
-    if (header) {
+    (()=>{
+      const header = document.getElementById('site-header');
+      if (!header) return;
       const hasReferrer = document.referrer;
-      if (hasReferrer) {
-        try {
-          const referrerUrl = new URL(document.referrer);
-          const isSameOrigin = referrerUrl.origin === window.location.origin;
-
-          if (isSameOrigin) {
-            // Create back button with double arrows for wider click area
-            const backBtn = document.createElement('button');
-            backBtn.className = 'js-back-btn';
-            backBtn.setAttribute('aria-label', 'Go back');
-            backBtn.textContent = '←←';
-
-            backBtn.addEventListener('click', (e) => {
-              e.preventDefault();
-              history.back();
-            });
-
-            // Insert before the logo link
-            header.insertBefore(backBtn, header.firstChild);
-          }
-        } catch (err) {
-          // If URL parsing fails, don't create button
-        }
-      }
-    }
+      if (!hasReferrer) return;
+      const referrerUrl = new URL(document.referrer);
+      const isSameOrigin = referrerUrl.origin === window.location.origin;
+      if (!isSameOrigin) return;
+      const btn = document.createElement('span');
+      btn.className = 'js-back-btn';
+      btn.setAttribute('aria-label', 'Go back');
+      btn.textContent = '←←';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+      });
+      header.insertBefore(btn, header.firstChild);
+    })()
   </script>
 </body>
 </html>

@@ -1,15 +1,12 @@
 :root {
-  /* Color palette */
-  --color-border: #38383d;    /* slate-400,firefox; */
-  --color-body-bg: #1f1f1f;   /* black-200,vscode; */
-  --color-code-bg: #24292e;   /* slate-100,github; */
-  --color-text: #bebebe;      /* grey-100,google; */
-  --color-separator: #38383d; /* slate-400,firefox; */
-  --color-em: #f7f7f7;        /* white-500,namchee; */
-  --color-hyprlink: #75bfff;  /* blue-300,firefox; */
-  --color-heading: #64d164;   /* green-200,me; */
-  --color-yellow: #feca88;    /* yellow,lynx; */
-  --color-purple: #b98eff;    /* ,firefox; */
+  --color-black-d1: #1f1f1f;
+  --color-slate-d1: #38383d;
+  --color-grey-l2: #bebebe;
+  --color-white-l4: #f7f7f7;
+  --color-sky-l4: #75bfff;
+  --color-green-d4: #64d164;
+  --color-yellow-l1: #feca88;
+  --color-purple-l1: #b98eff;
 }
 
 /* ================================
@@ -65,33 +62,33 @@ td, th {
    Elements that use both bg-color and fg-color together */
 
 body {
-  background-color: var(--color-body-bg);  /* Base terminal background */
-  color: var(--color-text);  /* Base terminal text */
+  background-color: var(--color-black-d1);  /* Base terminal background */
+  color: var(--color-grey-l2);  /* Base terminal text */
 }
 pre {
-  background-color: var(--color-code-bg);
+  background-color: var(--color-slate-d1);
 }
 code:not(pre code) {
-  background-color: var(--color-code-bg);
-  color: var(--color-purple);
+  background-color: var(--color-slate-d1);
+  color: var(--color-purple-l1);
 }
 
 /* --- Single-color Semantic Rules --- */
 
 h2,h3,h4 {
-  color: var(--color-heading);
+  color: var(--color-green-d4);
 }
 em, strong {
-  color: var(--color-em);
+  color: var(--color-white-l4);
 }
 a {
-  color: var(--color-hyprlink);  /* All links */
+  color: var(--color-sky-l4);  /* All links */
 }
 a:hover {
-  color: var(--color-yellow);  /* Link hover */
+  color: var(--color-yellow-l1);  /* Link hover */
 }
 td, th {
-  border-color: var(--color-border);
+  border-color: var(--color-slate-d1);
 }
 
 /* ================================
@@ -161,7 +158,7 @@ h1,h2,h3,h4 {
 }
 
 h2 {
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-slate-d1);
 }
 h3::before {
   content: '# ';
@@ -191,32 +188,30 @@ code:not(pre code) {
 }
 
 h1 {
-  min-width: 180px; /* Fixed width to prevent shifting when button appears */
-  background-color: var(--color-yellow); /* Inverted: yellow background */
+  background-color: var(--color-yellow-l1); /* Inverted: yellow background */
   position: relative;
+  width: fit-content;
 }
 h1>span {
-  color: var(--color-body-bg); /* Inverted: black text */
+  color: var(--color-black-d1); /* Inverted: black text */
   display: block;
-  margin-inline: auto;
-  width: fit-content;
+  padding-inline: 1rem;
 }
 
 /* Dynamically created back button (JS only) */
 .js-back-btn {
   /* normalize */
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-size: inherit;
-	line-height: inherit;
-	font-family: inherit;
+	/* border: none; */
+	/* cursor: pointer; */
+	/* font-size: inherit; */
+	/* line-height: inherit; */
+	/* font-family: inherit; */
 
-	padding-inline: 9px;
+	cursor: pointer;
+	padding-inline: 0.5rem;
 	position: absolute;
-  &:hover {
-    text-decoration: underline;
-  }
+  translate: -100%;
+	background: var(--color-grey-l2);
 }
 
 .skip-link {
@@ -237,7 +232,7 @@ hr {
   border: none;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: var(--color-separator);  /* Section dividers */
+  border-top-color: var(--color-slate-d1);  /* Section dividers */
   margin-block: 1rem; /* Vertical */
   margin-inline: 1rem; /* Horizontal */
 }
@@ -245,7 +240,7 @@ hr {
 /* Code blocks */
 pre {
   overflow-x: auto;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-slate-d1);
   margin-inline: 0;
   padding-inline: 1rem;
 }
@@ -257,7 +252,7 @@ code:not(pre code) {
 blockquote {
   font-style: italic;
   padding-left: 1.3rem;
-  border-left: 2px solid var(--color-separator);
+  border-left: 2px solid var(--color-yellow-l1);
 }
 
 
@@ -285,7 +280,7 @@ blockquote {
   margin-bottom: 1rem;
 }
 .list0 li {
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-slate-d1);
 }
 .list0 li:last-child {
   border-bottom: none;

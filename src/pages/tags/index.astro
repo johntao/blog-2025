@@ -69,7 +69,8 @@ const sortedGroups = Array.from(groupedTags.entries())
 
 <BaseLayout title="Tags" cls="list1">
   <h2>Tags</h2>
-  <p style="opacity: 0.7; margin-bottom: 1.5rem;">Browse posts by tags</p>
+  <p>Browse posts by tags</p>
+  <hr />
 
   <div class="tags-grid">
     {sortedGroups.map(group => (
@@ -104,7 +105,7 @@ const sortedGroups = Array.from(groupedTags.entries())
   .tag-prefix {
     font-size: 1rem;
     margin: 0;
-    color: var(--color-hyprlink, #75bfff);
+    color: var(--color-purple-l1);
     white-space: nowrap;
   }
 
