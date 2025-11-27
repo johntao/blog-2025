@@ -1,19 +1,12 @@
 ---
+import Navigation from '../components/Navigation.astro';
+
 interface Props {
   title: string;
   cls: string;
 }
 
 const { title, cls } = Astro.props;
-
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Posts', href: '/posts' },
-  //{ label: 'Mood', href: '/mood' },
-  { label: 'Tags', href: '/tags' },
-  { label: 'About', href: '/about' }
-];
-
 const currentPath = Astro.url.pathname;
 ---
 
@@ -23,37 +16,16 @@ const currentPath = Astro.url.pathname;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} - JT's Weblog</title>
-  <link rel="icon" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
   <header>
-    <div class="header-container">
-      <h1 id="site-header">
-        <span>JT's Weblog</span>
-      </h1>
-    </div>
-    <!-- <p>Thoughts, writings, and musings</p> -->
+    <h1>JT's Weblog</h1>
   </header>
 
-  <!-- <hr> -->
-
-  <nav class="top-nav">
-    <p>
-      {navItems.map((item, index) => (
-        <>
-          {item.href === currentPath ? (
-            <strong>{item.label}</strong>
-          ) : (
-            <a href={item.href}>{item.label}</a>
-          )}
-          {index < navItems.length - 1 && ' | '}
-        </>
-      ))}
-    </p>
-  </nav>
+  <Navigation currentPath={currentPath} />
 
   <main id="main-content" class={cls}>
     <slot />
@@ -61,34 +33,22 @@ const currentPath = Astro.url.pathname;
 
   <hr>
 
-  <nav class="top-nav">
-    <p>
-      {navItems.map((item, index) => (
-        <>
-          {item.href === currentPath ? (
-            <strong>{item.label}</strong>
-          ) : (
-            <a href={item.href}>{item.label}</a>
-          )}
-          {index < navItems.length - 1 && ' | '}
-        </>
-      ))}
-    </p>
-  </nav>
+  <Navigation currentPath={currentPath} />
 
   <script>
     (()=>{
-      const header = document.getElementById('site-header');
+      const header = document.querySelector('header');
       if (!header) return;
       const hasReferrer = document.referrer;
       if (!hasReferrer) return;
       const referrerUrl = new URL(document.referrer);
       const isSameOrigin = referrerUrl.origin === window.location.origin;
       if (!isSameOrigin) return;
-      const btn = document.createElement('span');
+      const btn = document.createElement('button');
       btn.className = 'js-back-btn';
       btn.setAttribute('aria-label', 'Go back');
       btn.textContent = '←←';
+      btn.type = 'button';
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         history.back();
