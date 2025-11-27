@@ -5,7 +5,8 @@
   --color-white-l4: #f7f7f7;
   --color-sky-l4: #75bfff;
   --color-green-d4: #64d164;
-  --color-yellow-l1: #feca88;
+  --color-yellow-l1: #dbbd96;
+  --color-yellow-l2: #feca88;
   --color-purple-l1: #b98eff;
 }
 
@@ -85,7 +86,7 @@ a {
   color: var(--color-sky-l4);  /* All links */
 }
 a:hover {
-  color: var(--color-yellow-l1);  /* Link hover */
+  color: var(--color-yellow-l2);  /* Link hover */
 }
 td, th {
   border-color: var(--color-slate-d1);
@@ -188,7 +189,7 @@ code:not(pre code) {
 }
 
 h1 {
-  background-color: var(--color-yellow-l1); /* Inverted: yellow background */
+  background-color: var(--color-yellow-l2); /* Inverted: yellow background */
   position: relative;
   width: fit-content;
 }
@@ -252,7 +253,7 @@ code:not(pre code) {
 blockquote {
   font-style: italic;
   padding-left: 1.3rem;
-  border-left: 2px solid var(--color-yellow-l1);
+  border-left: 2px solid var(--color-yellow-l2);
 }
 
 
